@@ -49,15 +49,17 @@ The first stage of prototyping was to explore how the UI might 'flow' between st
 
 This Figma demo shows the initial design for the UI 'flow':
 
-**FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT**
+*FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+To test the UI flow I asked my enduser what they wanted to see and change on the first version saying to add colour and change around some buttons with a curved radius
+and I did that so now the UI is more colourful and better on the eyes
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+Was easier to look at and read/navigate the UI when the colour was changed and turned to dark mode but also making curved corners to seem not so aggresive
 
 *IMPROVED FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
 
