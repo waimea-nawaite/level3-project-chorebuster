@@ -54,12 +54,12 @@ This Figma demo shows the initial design for the UI 'flow':
 
 ### Testing
 
-To test the UI flow I asked my enduser what they wanted to see and change on the first version saying to add colour and change around some buttons with a curved radius
-and I did that so now the UI is more colourful and better on the eyes
+To test the UI flow I asked my enduser what they wanted to see and change on the first version they said that they like the layout for now but to change it
+up later and add more pages of other ideas they hadn't come up with yet. They didnt really say anything about need to change or improve much.
 
 ### Changes / Improvements
 
-Was easier to look at and read/navigate the UI when the colour was changed and turned to dark mode but also making curved corners to seem not so aggresive
+Very simple changes like making buttons and adding text my enduser liked the ui flow and didnt want to change much yet
 
 *IMPROVED FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
 
@@ -74,7 +74,8 @@ This Figma demo shows the initial layout design for the UI:
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+But also said to add colour and change around some buttons with a curved radius and
+to maybe add a background behind the text to make it pop out more.
 
 ### Changes / Improvements
 
