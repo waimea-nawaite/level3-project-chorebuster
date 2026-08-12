@@ -49,7 +49,8 @@ The first stage of prototyping was to explore how the UI might 'flow' between st
 
 This Figma demo shows the initial design for the UI 'flow':
 
-*FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+![DB Design](screenshots/V1-First-Prototype.png)
+[UI Flow First Layout](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=81f57451-85cc-819d-8008-7834312c8578&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
 
 
 ### Testing
@@ -61,7 +62,8 @@ up later and add more pages of other ideas they hadn't come up with yet. They di
 
 Very simple changes like making buttons and adding text my enduser liked the ui flow and didnt want to change much yet
 
-*IMPROVED FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+![DB Design](screenshots/V1-Final-Prototype.png)
+[UI Flow Final Layout](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=f0485fb1-4e63-8165-8008-3907adf20b46&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
 
 
 ## Initial UI Prototype
@@ -70,18 +72,22 @@ The next stage of prototyping was to develop the layout for each screen of the U
 
 This Figma demo shows the initial layout design for the UI:
 
-*FIGMA PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+![DB Design](screenshots/V2-First-Prototype.png)
+[Initial Layout Link](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=3be9e5e1-190f-8090-8008-75871df6c303&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
 
 ### Testing
 
-But also said to add colour and change around some buttons with a curved radius and
-to maybe add a background behind the text to make it pop out more.
+I tested the UI flow of the initial UI prototype with asking my enduser how they like and what I should change to suit their opinions and likes a few changes i noted from their
+feedback was to add a grayer background behind some of the text to look nicer. Make the chorelist into boxes not lines and they wanted a notes page so they can add notes to a chore
+for instructions or notes.
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+Changes I made was adding gray background to let the text pop more and change the chorelist into boxes instead of lines which looks way better and added a notes page so they can
+add notes or instructions.
 
-*FIGMA IMPROVED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+![DB Design](screenshots/V2-Final-Prototype.png)
+[Initial Layout Final](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=2be68822-842f-8175-8008-6620a58c4c81&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
 
 
 ## Refined UI Prototype
@@ -90,17 +96,19 @@ Having established the layout of the UI screens, the prototype was refined visua
 
 This Figma demo shows the UI with refinements applied:
 
-*FIGMA REFINED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+![DB Design](screenshots/V3-First-Prototype.png)
+[Refined Layout First](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=81f57451-85cc-819d-8008-782357ecce9a&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+My end user liked the first prototype of the refined UI and loved the leaderboard idea to get kids excited but also gave me some requests to finish it up like making some buttons that do other things a different colour and to make the gray boxes with a radius to not seem so sharp and aggressive. Add a background behind the titles of the pages and to move the buttons around for easier movement around the pages
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+I changed almost all of the boxes to have a radius and I agree it looks very neat. My end user also asked to add a rewards for the leaderboard so that who ever wins gets a reward. I moved only a couple buttons around and changed the colours of the specific buttons to easily spot while also adding a blueish background behind the titles to make it look nice again.
 
-*FIGMA IMPROVED REFINED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+![DB Design](screenshots/V3-Final-Prototype.png)
+[Refined Layout Final](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=8694f143-a620-8054-8008-6617c49470c0&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
 
 
 ## Sprint Review
