@@ -1,5 +1,5 @@
 {#=====================================================
-  Home page
+  Chore List
 =====================================================#}
 
 {% extends 'pages/_base.jinja' %}
@@ -7,30 +7,30 @@
 
 {% block content %}
 
-    <h2>Notes</h2>
+    <h2>Chores</h2>
 
-    <section id="notes">
+    <section id="chores">
 
-        {% for note in notes %}
+        {% for note in chores %}
 
-            <div class="note {{ 'pinned' if note.pinned }}">
+            <div class="chore {{ 'pinned' if chore.pinned }}">
 
                 <header>
-                    <h3>{{ note.title }}</h3>
-                    {{ "📌" if note.pinned }}
+                    <h3>{{ chore.title }}</h3>
+                    {{ "📌" if chore.pinned }}
                 </header>
 
-                <p>{{ note.body | paragraphs }}</p>
+                <p>{{ chore.body | paragraphs }}</p>
 
                 <footer>
-                    Created on {{ note.created | local | format }}
+                    Created on {{ chore.created | local | format }}
                 </footer>
 
             </div>
 
         {% else %}
 
-            <p>No Notes!</p>
+            <p>No Chores!</p>
 
         {% endfor %}
 

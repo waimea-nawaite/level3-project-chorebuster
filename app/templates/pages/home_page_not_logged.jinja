@@ -1,0 +1,25 @@
+{#=====================================================
+  Home page
+=====================================================#}
+
+{% extends 'pages/_base.jinja' %}
+
+
+{% block content %}
+
+    <h2>Log In</h2>
+
+    <section id="not_logged_in"> 
+
+                <header>
+                    <p>You are not Logged In!</p>
+                </header>
+
+                <p>Sign up now or Log into an existing account</p>
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
+
