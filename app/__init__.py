@@ -24,12 +24,11 @@ app = Flask(__name__)
 # Home page - Show all notes
 #-----------------------------------------------------------
 @app.get("/")
-def show_notes():
+def show_chores():
     with connect_db() as db:
         sql = """
-            SELECT id, title, body, pinned, created
-            FROM note
-            ORDER BY pinned DESC, created DESC
+            SELECT id, title, due_time, points, complete
+            FROM chores
         """
         params = ()
         account = db.execute(sql, params).fetchall()

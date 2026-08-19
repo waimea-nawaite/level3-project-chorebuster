@@ -15,30 +15,6 @@
 #     SEED_DATA = "INSERT INTO name (...)" or None
 #----------------------------------------------------------------------------
 
-class NoteTable:
-
-    NAME = "note"
-
-    SCHEMA = """
-        CREATE TABLE note (
-            id      INTEGER PRIMARY KEY AUTOINCREMENT,
-            title   TEXT NOT NULL,
-            body    TEXT,
-            pinned  INTEGER DEFAULT 0,
-            created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    """
-
-    SEED_DATA = """
-        INSERT INTO note (title, pinned, body)
-        VALUES
-            ("Welcome!",      1, "This is a demo application using Flask, Jinja and SQLite."),
-            ("Shopping List", 0, "Milk\nBread\nEggs\nCheese"),
-            ("Meeting Notes", 0, "Discussed project timeline.\n\nAction items:\n- Review design\n- Update docs"),
-            ("Recipe: Pasta", 0, "Ingredients:\n- 500g pasta\n- Tomato sauce\n- Garlic\n\nCook pasta, add sauce, enjoy!"),
-            ("Important!",    1, "Remember to backup your database regularly.")
-    """
-
 # Add more table classes here...
 
 class UserTable:
@@ -55,7 +31,45 @@ class UserTable:
         )
     """
 
-    
+    SEED_DATA = """
+        INSERT INTO users (name, username, points)
+        VALUES
+            ("Bob", "BOBBY", 20)
+    """
+
+
+class ChoreTable:
+
+    name = "chores"
+
+    SCHEMA = """
+        CREATE TABLE chores (
+            id       INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id  INTEGER NOT NULL,
+            title    TEXT    NOT NULL,
+            due_time TIME    NOT NULL,
+            points   INTEGER DEFAULT (0),
+            complete INTEGER DEFAULT (0)
+        )
+    """
+
+    SEED_DATA = """
+        INSERT INTO chores (title, due_time, points, complete)
+        VALUES
+            ("Meat", 15, 6, 0)
+    """
+
+class FamilyTable:
+
+    name = "family"
+
+    SCHEMA = """
+        CREATE TABLE family (
+            id      INTEGER PRIMARY KEY AUTOINCREMENT,
+            surname TEXT    NOT NULL,
+            user_id INTEGER NOT NULL
+        )
+    """
 
 
 

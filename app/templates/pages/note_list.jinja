@@ -11,20 +11,14 @@
 
     <section id="chores">
 
-        {% for note in chores %}
+        {% for chore in chores %}
 
-            <div class="chore {{ 'pinned' if chore.pinned }}">
+            <div class="chore">
 
                 <header>
                     <h3>{{ chore.title }}</h3>
                     {{ "📌" if chore.pinned }}
                 </header>
-
-                <p>{{ chore.body | paragraphs }}</p>
-
-                <footer>
-                    Created on {{ chore.created | local | format }}
-                </footer>
 
             </div>
 
