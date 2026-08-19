@@ -41,6 +41,22 @@ class NoteTable:
 
 # Add more table classes here...
 
+class UserTable:
+
+    name = "users"
+
+    SCHEMA = """
+        CREATE TABLE users (
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            name          TEXT    NOT NULL,
+            username      TEXT    NOT NULL,
+            password_hash TEXT    NOT NULL,
+            points        INTEGER NOT NULL
+        )
+    """
+
+    
+
 
 
 #----------------------------------------------------------------------------

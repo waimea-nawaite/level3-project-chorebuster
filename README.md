@@ -13,7 +13,7 @@ The app has the following key features:
 
 ## Supporting Documents
 
-All documentation is hosted on [GithubPages](https://waimea-nawaite.github.io/level3-project-chorethingy/)
+All documentation is hosted on [GithubPages](https://waimea-nawaite.github.io/level3-project-chorebuster/)
 
 Task Instructions:
 - [Instruction documents](docs/instructions/)
