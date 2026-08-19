@@ -19,28 +19,26 @@
 
 class UserTable:
 
-    name = "users"
+    NAME = "users"
 
     SCHEMA = """
         CREATE TABLE users (
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
-            name          TEXT    NOT NULL,
+            forename      TEXT    NOT NULL,
+            surname       TEXT    NOT NULL,
             username      TEXT    NOT NULL,
             password_hash TEXT    NOT NULL,
-            points        INTEGER NOT NULL
+            points        INTEGER NOT NULL DEFAULT (0)
         )
     """
 
     SEED_DATA = """
-        INSERT INTO users (name, username, points)
-        VALUES
-            ("Bob", "BOBBY", 20)
     """
 
 
 class ChoreTable:
 
-    name = "chores"
+    NAME = "chores"
 
     SCHEMA = """
         CREATE TABLE chores (
@@ -49,19 +47,21 @@ class ChoreTable:
             title    TEXT    NOT NULL,
             due_time TIME    NOT NULL,
             points   INTEGER DEFAULT (0),
-            complete INTEGER DEFAULT (0)
+            complete INTEGER DEFAULT (0),
+
+            FOREIGN KEY(user_id) REFERENCES users(id)
         )
     """
 
     SEED_DATA = """
-        INSERT INTO chores (title, due_time, points, complete)
+        INSERT INTO chores (user_id, title, due_time, points, complete)
         VALUES
-            ("Meat", 15, 6, 0)
+            (1, "Meat", 15, 6, 0)
     """
 
 class FamilyTable:
 
-    name = "family"
+    NAME = "family"
 
     SCHEMA = """
         CREATE TABLE family (
@@ -89,7 +89,8 @@ class FamilyTable:
 #----------------------------------------------------------------------------
 
 TABLES = [
-    NoteTable,
+    UserTable,
+    ChoreTable
     # Add more tables here...
 ]
 

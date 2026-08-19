@@ -30,9 +30,15 @@
         </a>
 
         <nav>
-            <a href="/">All Notes</a>
-            <a href="/">Link</a>
-            <a href="/">Link</a>
+            {% if session.logged_in %}
+                <li>Welcome, {{ session.user.username }}!</li>
+                <a href="/logout">Logout</a>
+                <a href="/chores/new">New Chore</a>
+                <a href="/chores">Chore List</a>
+            {% else %}
+                <a href="/user/login">Login</a>
+                <a href="/user/new">Sign-Up</a>
+            {% endif %} 
         </nav>
     </header>
 
