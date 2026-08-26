@@ -115,10 +115,28 @@ def login_user():
         }
 
         flash("Login successful", "success")
-        return redirect("/")
+        return redirect("/home_logged_in")
     
 #-----------------------------------------------------------
-# Home page
+# Handle user logout
+#-----------------------------------------------------------
+
+@app.get("/logout")
+def logout():
+    session.clear()
+    flash(f"You have been logged out", "success")
+    return redirect("/")
+
+#-----------------------------------------------------------
+# New Chore Page
+#-----------------------------------------------------------
+@app.get("/chore/new")
+def show_chore_form():
+    return render_template("pages/chore_form.jinja")
+
+    
+#-----------------------------------------------------------
+# Home page not logged in
 #-----------------------------------------------------------
 @app.get("/")
 def show_home_page():
@@ -132,6 +150,29 @@ def show_home_page():
         return render_template("pages/home_page_not_logged.jinja")
 
 #-----------------------------------------------------------
+# Home page logged in
+#-----------------------------------------------------------
+@app.get("/home_logged_in")
+def show_home_page_logged_in():
+    with connect_db() as db:
+        sql = """
+            SELECT 
+            *
+            FROM users
+        """
+        params = ()
+        users = db.execute(sql, params).fetchall()
+
+        flash("Test message")
+        flash("Test SUCCESS message", "success")
+        flash("Test INFO message", "info")
+        flash("Test WARNING message", "warning")
+        flash("Test ERROR message", "error")
+
+        return render_template("pages/home_page_logged_in.jinja", users=users)
+
+
+#-----------------------------------------------------------
 # Chore page - Show all chores
 #-----------------------------------------------------------
 @app.get("/chores")
@@ -141,12 +182,15 @@ def show_all_chores():
             SELECT 
                 chores.id,
                 chores.title,
+                chores.body,
                 chores.due_time,
                 chores.points,
-                chores.complete
+                chores.complete,
+                chores.pinned
             
             FROM chores
             JOIN users ON chores.user_id = users.id
+            ORDER BY pinned DESC
         """
         params = ()
         chores = db.execute(sql, params).fetchall()
@@ -154,7 +198,54 @@ def show_all_chores():
         return render_template("pages/chore_list.jinja", chores=chores)
 
 
+#-----------------------------------------------------------
+# Handle user chore
+#-----------------------------------------------------------
+    
+@app.post("/chore")
+def add_chore():
+    # Get form data
+    title    = request.form.get('title', '').strip()
+    body     = request.form.get('body', '').strip()
+    due_time = request.form.get('due_time', '').strip()
+    points   = request.form.get('points', '').strip()
 
+    # Validate data
+    if not title:
+        flash("Title is required", "error")
+        return redirect("/chore/new")
+    
+    if not body:
+        flash("Body is required", "error")
+        return redirect("/chore/new")
+    
+    if len(body) > 200:
+        flash("Body is too long (max 200 chars)", "error")
+        return redirect("/chore/new")
+
+    if len(title) > 40:
+        flash("Title is too long (max 40 chars)", "error")
+        return redirect("/chore/new")
+
+    # Escape text inputs
+    title = html.escape(title)
+    body = html.escape(body)
+
+    # User id is in the session
+    user_id = session["user"]["id"]
+
+    # Add to the database
+    with connect_db() as db:
+        sql = """
+            INSERT INTO chores (user_id, title, body, due_time, points)
+            VALUES (?, ?, ?, ?, ?)
+        """
+        params = (user_id, title, body, due_time, points)
+        db.execute(sql, params)
+
+        flash(f"Chore added")
+        return redirect("/chore/new")
+    
 
 #===========================================================
 # Configure the app

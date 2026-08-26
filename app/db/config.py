@@ -45,18 +45,20 @@ class ChoreTable:
             id       INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id  INTEGER NOT NULL,
             title    TEXT    NOT NULL,
-            due_time TIME    NOT NULL,
+            body     TEXT    NOT NULL,
+            due_time TIME,
             points   INTEGER DEFAULT (0),
             complete INTEGER DEFAULT (0),
+            pinned  INTEGER DEFAULT 0,
 
-            FOREIGN KEY(user_id) REFERENCES users(id)
+            FOREIGN KEY(user_id) REFERENCES user(id)
         )
     """
 
     SEED_DATA = """
-        INSERT INTO chores (user_id, title, due_time, points, complete)
+        INSERT INTO chores (user_id, title, body, due_time, points, complete, pinned)
         VALUES
-            (1, "Meat", 15, 6, 0)
+            (1, "Meat", "Steak", 15, 6, 0, 1)
     """
 
 class FamilyTable:

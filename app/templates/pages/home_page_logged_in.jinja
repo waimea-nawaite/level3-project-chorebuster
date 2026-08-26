@@ -7,16 +7,17 @@
 
 {% block content %}
 
+    <h2>Home Page</h2>
+    <h3>Logged In!</h3>
 
-    <h2>Log In</h2>
+    <section id="logged_in_home_page"> 
 
-    <section id="not_logged_in_home_page"> 
+      <header>
+          <p>Hello {{ session.user.username }}</p>
+      </header>
 
-        <header>
-            <p>You are not Logged In!</p>
-        </header>
+      <p></p>
 
-        <p>Sign up now or Log into an existing account</p>
 
     </section>
 

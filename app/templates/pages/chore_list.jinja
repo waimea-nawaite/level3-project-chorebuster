@@ -16,9 +16,12 @@
             <div class="chore">
 
                 <header>
-                    <h3>{{ chore.title }}</h3>
-                    {{ "📌" if chore.pinned }}
+                    <h3>{{ "📌" if chore.pinned }} {{ chore.title }}</h3>
                 </header>
+
+                <p>Body: {{chore.body}}</p>
+                <p>Due Time (Mins): {{chore.due_time}}</p>
+                <p>Points: {{chore.points}}</p>
 
             </div>
 

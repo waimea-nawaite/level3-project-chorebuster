@@ -1,0 +1,37 @@
+{#=====================================================
+  Help page
+=====================================================#}
+
+{% extends 'pages/_base.jinja' %}
+
+
+{% block content %}
+
+    <form method="post" action="/chore">
+      <h3>New Chore</h3>
+
+      <label>
+          Title
+          <input name="title" type="text" placeholder="e.g. Dinner" required>
+      </label>
+
+      <label>
+          Body
+          <textarea name="body" placeholder="e.g. Noodles with meat" required></textarea>
+      </label>
+
+      <label>
+          Due Time
+          <textarea name="due_time" placeholder="Write the actual time e.g. 15:30" required></textarea>
+      </label>
+
+      <label>
+          Points
+          <textarea name="points" placeholder="The amount of points e.g. 5" required></textarea>
+      </label>
+
+      <button>Add Chore</button>
+  </form>
+
+{% endblock %}
+
