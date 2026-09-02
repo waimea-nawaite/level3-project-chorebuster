@@ -23,6 +23,10 @@
                 <p>Due Time (Mins): {{chore.due_time}}</p>
                 <p>Points: {{chore.points}}</p>
 
+                {% if session.logged_in and chore.uid == session.user.id %}
+                    <button id="chore-button"><a href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a></button>
+                {% endif %}
+
             </div>
 
         {% else %}

@@ -180,13 +180,15 @@ def show_all_chores():
     with connect_db() as db:
         sql = """
             SELECT 
-                chores.id,
+                chores.id       AS mid,
                 chores.title,
                 chores.body,
                 chores.due_time,
                 chores.points,
                 chores.complete,
-                chores.pinned
+                chores.pinned,
+                users.id        AS uid,
+                users.forename
             
             FROM chores
             JOIN users ON chores.user_id = users.id
@@ -246,6 +248,35 @@ def add_chore():
         flash(f"Chore added")
         return redirect("/chore/new")
     
+#-----------------------------------------------------------
+# Delete a chore
+#-----------------------------------------------------------
+
+@app.get("/chore/delete/<int:id>")
+@login_required
+def delete(id):
+    with connect_db() as db:
+        sql = """
+            SELECT user_id
+            FROM chores
+            WHERE id=?
+        """
+        params = (id,)
+        chore = db.execute(sql, params).fetchone()
+
+        if chore and chore["user_id"] == session["user"]["id"]:
+            sql = """
+                DELETE FROM
+                chores
+                WHERE id=?
+            """
+            params = [id]
+            db.execute(sql, params)
+            flash("The chore has been deleted", "success")
+
+        return redirect("/chores")
+
+
 
 #===========================================================
 # Configure the app
