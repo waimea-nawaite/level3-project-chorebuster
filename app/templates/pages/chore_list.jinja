@@ -13,20 +13,17 @@
 
         {% for chore in chores %}
 
-            <div class="chore">
+            <div class="chore-card">
+                <h3>{{ "📌" if chore.pinned }} {{ chore.title }}</h3>
 
-                <header>
-                    <h3>{{ "📌" if chore.pinned }} {{ chore.title }}</h3>
-                </header>
+                <div class="chore-due">
+                    Due: {{chore.due_time}}
+                </div>
 
-                <p>Body: {{chore.body}}</p>
-                <p>Due Time (Mins): {{chore.due_time}}</p>
-                <p>Points: {{chore.points}}</p>
-
-                {% if session.logged_in and chore.uid == session.user.id %}
-                    <button id="chore-button"><a href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a></button>
-                {% endif %}
-
+                <div class="chore-bottom">
+                    <span>Points: {{ chore.points }}</span>
+                    <button>Edit</button>
+                </div>
             </div>
 
         {% else %}
@@ -39,3 +36,8 @@
 
 {% endblock %}
 
+
+{# 
+{% if session.logged_in and chore.uid == session.user.id %}
+    <button id="chore-button"><a href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a></button>
+{% endif %} #}

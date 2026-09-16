@@ -28,7 +28,7 @@ class UserTable:
             surname       TEXT    NOT NULL,
             username      TEXT    NOT NULL,
             password_hash TEXT    NOT NULL,
-            points        INTEGER NOT NULL DEFAULT (0)
+            points        INTEGER DEFAULT (0)
         )
     """
 
@@ -67,12 +67,37 @@ class FamilyTable:
 
     SCHEMA = """
         CREATE TABLE family (
-            id      INTEGER PRIMARY KEY AUTOINCREMENT,
-            surname TEXT    NOT NULL,
-            user_id INTEGER NOT NULL
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            surname     TEXT    NOT NULL,
+            family_code TEXT NOT NULL UNIQUE
         )
     """
 
+    SEED_DATA = """
+        INSERT INTO family (surname, family_code)
+        VALUES
+            ("Waite", "NOOT")
+    """
+
+class FamilyMemberTable:
+
+    NAME = "family_members"
+
+    SCHEMA = """
+        CREATE TABLE family_members (
+            id        INTEGER PRIMARY KEY AUTOINCREMENT,
+            family_id INTEGER NOT NULL,
+            user_id   INTEGER NOT NULL,
+            role      TEXT    NOT NULL DEFAULT ('member'),
+
+            FOREIGN KEY(family_id) REFERENCES family(id),
+            FOREIGN KEY(user_id) REFERENCES users(id)
+        )
+    """
+
+    SEED_DATA = """
+
+    """
 
 
 #----------------------------------------------------------------------------
@@ -92,7 +117,9 @@ class FamilyTable:
 
 TABLES = [
     UserTable,
-    ChoreTable
+    ChoreTable,
+    FamilyTable,
+    FamilyMemberTable
     # Add more tables here...
 ]
 

@@ -28,6 +28,13 @@ def show_signup_form():
     return render_template("pages/user_form.jinja")
 
 #-----------------------------------------------------------
+# Signup Page
+#-----------------------------------------------------------
+@app.get("/user/new/family")
+def show_signup_family_form():
+    return render_template("pages/user_family_form.jinja")
+
+#-----------------------------------------------------------
 # Login Page
 #-----------------------------------------------------------
 @app.get("/user/login")
@@ -53,6 +60,72 @@ def edit_message_form():
 #-----------------------------------------------------------
 @app.post("/user")
 def add_user():
+    forename = request.form.get('forename', '').strip()
+    surname  = request.form.get('surname', '').strip()
+    username = request.form.get('username', '').strip().lower()
+    password = request.form.get('password', '').strip()
+    family_code = request.form.get('family_code', '').strip().upper()
+    points = "0"
+
+    with connect_db() as db:
+        # Check that the family code exists
+        sql = """
+            SELECT id
+            FROM family
+            WHERE family_code=?
+        """
+        params = (family_code,)
+        family = db.execute(sql, params).fetchone()
+
+        if not family:
+            flash("Family code does not exist", "error")
+            return redirect("/user/new")
+
+        # Check if username already exists
+        sql = "SELECT id FROM users WHERE username=?"
+        params = (username,)
+        user = db.execute(sql, params).fetchone()
+
+        if user:
+            flash(f"Username '{username}' already exists", "error")
+            return redirect("/user/new")
+
+
+        # Create the password hash
+        password_hash = generate_password_hash(password)
+
+        # Create the user
+        sql = """
+            INSERT INTO users (forename, surname, username, password_hash, points)
+            VALUES (?, ?, ?, ?, ?)
+        """
+        params = (forename, surname, username, password_hash, points)
+        db.execute(sql, params)
+
+        # Get the newly created user's ID
+        user_id = db.execute(
+            "SELECT id FROM users WHERE username=?",
+            (username,)
+        ).fetchone()["id"]
+
+        # Add the user to the family
+        sql = """
+            INSERT INTO family_members (family_id, user_id, role)
+            VALUES (?, ?, ?)
+        """
+        params = (family["id"], user_id, "member")
+        db.execute(sql, params)
+
+        flash("Account created. Please login", "success")
+
+        return render_template("pages/home_page_logged_in.jinja")
+
+
+#-----------------------------------------------------------
+# Handle user signup with Family
+#-----------------------------------------------------------
+@app.post("/user/family")
+def add_user_family():
     forename = request.form.get('forename', '').strip()
     surname  = request.form.get('surname',  '').strip()
     username = request.form.get('username', '').strip().lower()
@@ -134,7 +207,6 @@ def logout():
 def show_chore_form():
     return render_template("pages/chore_form.jinja")
 
-    
 #-----------------------------------------------------------
 # Home page not logged in
 #-----------------------------------------------------------
