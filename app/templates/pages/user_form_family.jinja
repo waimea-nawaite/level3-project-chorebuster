@@ -1,0 +1,42 @@
+{#=====================================================*
+  Create Family form
+*=====================================================#}
+
+{% extends 'pages/_base.jinja' %}
+
+{% block content %}
+
+    <h2>Sign Up & Create New Family</h2>
+
+    <form method="post" action="/user/family">
+
+      <label>
+        Forename
+        <input type="text" name="forename" required>
+      </label>
+
+      <label>
+        Surname
+        <input type="text" name="surname" required>
+      </label>
+
+      <label>
+        Username
+        <input type="text" name="username" required>
+      </label>
+
+      <label>
+        Password
+        <input type="password" name="password" required>
+      </label>
+
+      <label>
+        Family Name
+        <input type="text" name="family_name" required>
+      </label>
+
+      <button>Submit</button>
+      
+    </form>
+
+{% endblock %}

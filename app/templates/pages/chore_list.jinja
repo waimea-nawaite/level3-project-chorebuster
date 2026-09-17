@@ -21,9 +21,12 @@
                 </div>
 
                 <div class="chore-bottom">
-                    <span>Points: {{ chore.points }}</span>
-                    <button>Edit</button>
+                {% if session.logged_in and chore.uid == session.user.id %}
+                    <button id="chore-button"><a href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a></button>
+                    <button id="chore-button"><a href="/chore/edit/{{ chore.mid }}">Edit</a></button>
+                {% endif %}
                 </div>
+
             </div>
 
         {% else %}
@@ -37,7 +40,4 @@
 {% endblock %}
 
 
-{# 
-{% if session.logged_in and chore.uid == session.user.id %}
-    <button id="chore-button"><a href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a></button>
-{% endif %} #}
+

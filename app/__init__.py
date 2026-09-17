@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 from os import getenv
 from io import BytesIO
 import html
+import random
+import string
 from app.helpers import *
 
 
@@ -32,7 +34,7 @@ def show_signup_form():
 #-----------------------------------------------------------
 @app.get("/user/new/family")
 def show_signup_family_form():
-    return render_template("pages/user_family_form.jinja")
+    return render_template("pages/user_form_family.jinja")
 
 #-----------------------------------------------------------
 # Login Page
@@ -47,6 +49,7 @@ def show_login_form():
 @app.get("/chore/new")
 def show_chores_form():
     return render_template("pages/chore_form.jinja")
+
 
 #-----------------------------------------------------------
 # Edit a Message Page
@@ -90,7 +93,6 @@ def add_user():
             flash(f"Username '{username}' already exists", "error")
             return redirect("/user/new")
 
-
         # Create the password hash
         password_hash = generate_password_hash(password)
 
@@ -116,9 +118,8 @@ def add_user():
         params = (family["id"], user_id, "member")
         db.execute(sql, params)
 
-        flash("Account created. Please login", "success")
-
-        return render_template("pages/home_page_logged_in.jinja")
+        flash("Account created", "success")
+        return redirect("/user/login")
 
 
 #-----------------------------------------------------------
@@ -130,6 +131,7 @@ def add_user_family():
     surname  = request.form.get('surname',  '').strip()
     username = request.form.get('username', '').strip().lower()
     password = request.form.get('password', '').strip()
+    family_name = request.form.get('family_name', '').strip()
     points = "0"
 
     with connect_db() as db:
@@ -143,6 +145,7 @@ def add_user_family():
 
         password_hash = generate_password_hash(password)
 
+        # Create the user
         sql = """
             INSERT INTO users (forename, surname, username, password_hash, points)
             VALUES (?, ?, ?, ?, ?)
@@ -150,9 +153,40 @@ def add_user_family():
         params = (forename, surname, username, password_hash, points)
         db.execute(sql, params)
 
-        flash("Account created. Please login", "success")
-        return redirect("/user/login")
+        # Get the new user's ID
+        user_id = db.execute(
+            "SELECT id FROM users WHERE username=?",
+            (username,)
+        ).fetchone()["id"]
 
+        # Generate a family code
+        family_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+        # Create the family
+        sql = """
+            INSERT INTO family (surname, family_code)
+            VALUES (?, ?)
+        """
+
+        params = (family_name, family_code)
+        db.execute(sql, params)
+
+        # Get the new family's ID
+        family_id = db.execute(
+            "SELECT id FROM family WHERE family_code=?",
+            (family_code,)
+        ).fetchone()["id"]
+
+        # Add the user to the family as the owner
+        sql = """
+            INSERT INTO family_members (family_id, user_id, role)
+            VALUES (?, ?, ?)
+        """
+        params = (family_id, user_id, "owner")
+        db.execute(sql, params)
+
+        flash(f"Family created! Your family code is {family_code}", "success")
+        return redirect("/user/login")
 #-----------------------------------------------------------
 # Handle user login
 #-----------------------------------------------------------
@@ -164,9 +198,11 @@ def login_user():
 
     with connect_db() as db:
         sql = """
-            SELECT id, forename, surname, password_hash
+            SELECT users.id, users.forename, users.surname, users.password_hash,
+            family_members.role
             FROM users
-            WHERE username=?
+            JOIN family_members ON users.id = family_members.user_id
+            WHERE users.username=?
         """
         params = (username,)
         user = db.execute(sql, params).fetchone()
@@ -185,10 +221,11 @@ def login_user():
             "username": username,
             "forename": user["forename"],
             "surname":  user["surname"],
+            "role":     user["role"],
         }
 
         flash("Login successful", "success")
-        return redirect("/home_logged_in")
+        return redirect("/")
     
 #-----------------------------------------------------------
 # Handle user logout
@@ -198,7 +235,7 @@ def login_user():
 def logout():
     session.clear()
     flash(f"You have been logged out", "success")
-    return redirect("/")
+    return redirect("/home_not_logged")
 
 #-----------------------------------------------------------
 # New Chore Page
@@ -210,7 +247,7 @@ def show_chore_form():
 #-----------------------------------------------------------
 # Home page not logged in
 #-----------------------------------------------------------
-@app.get("/")
+@app.get("/home_not_logged")
 def show_home_page():
 
         flash("Test message")
@@ -224,7 +261,7 @@ def show_home_page():
 #-----------------------------------------------------------
 # Home page logged in
 #-----------------------------------------------------------
-@app.get("/home_logged_in")
+@app.get("/")
 def show_home_page_logged_in():
     with connect_db() as db:
         sql = """
@@ -277,7 +314,13 @@ def show_all_chores():
 #-----------------------------------------------------------
     
 @app.post("/chore")
+@login_required
 def add_chore():
+
+    if session["user"]["role"] != "owner":
+        flash("Only the family owner can create chores", "error")
+        return redirect("/chores")
+                        
     # Get form data
     title    = request.form.get('title', '').strip()
     body     = request.form.get('body', '').strip()
@@ -321,9 +364,31 @@ def add_chore():
         return redirect("/chore/new")
     
 #-----------------------------------------------------------
+# Edit chore
+#-----------------------------------------------------------
+@app.get("/chore/edit/<int:id>")
+@login_required
+def edit(id):
+    with connect_db() as db:
+        sql = """
+            SELECT
+                chores.id     AS mid,
+                chores.title,
+                chores.body,
+                users.id        AS uid,
+                users.forename
+
+            FROM chores
+            JOIN users ON chores.user_id = users.id
+            WHERE chores.id=?
+    """
+        params = [id]
+        chore = db.execute(sql, params).fetchone()
+        return render_template("pages/chore_edit.jinja", chore=chore)
+
+#-----------------------------------------------------------
 # Delete a chore
 #-----------------------------------------------------------
-
 @app.get("/chore/delete/<int:id>")
 @login_required
 def delete(id):

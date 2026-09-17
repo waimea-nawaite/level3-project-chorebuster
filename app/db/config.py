@@ -51,14 +51,12 @@ class ChoreTable:
             complete INTEGER DEFAULT (0),
             pinned  INTEGER DEFAULT 0,
 
-            FOREIGN KEY(user_id) REFERENCES user(id)
+            FOREIGN KEY(user_id) REFERENCES users(id)
         )
     """
 
     SEED_DATA = """
-        INSERT INTO chores (user_id, title, body, due_time, points, complete, pinned)
-        VALUES
-            (1, "Meat", "Steak", 15, 6, 0, 1)
+
     """
 
 class FamilyTable:
@@ -74,9 +72,7 @@ class FamilyTable:
     """
 
     SEED_DATA = """
-        INSERT INTO family (surname, family_code)
-        VALUES
-            ("Waite", "NOOT")
+
     """
 
 class FamilyMemberTable:

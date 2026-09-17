@@ -1,0 +1,27 @@
+{#=====================================================
+  Edit chore page
+=====================================================#}
+
+{% extends 'pages/_base.jinja' %}
+
+
+{% block content %}
+
+<form method="POST">
+
+    <label>Title</label>
+    <input type="text"
+           name="title"
+           value="{{ chore.title }}">
+
+    <label>Body</label>
+    <textarea name="body">{{ chore.body }}</textarea>
+
+    <button type="submit">
+        Save Changes
+    </button>
+
+</form>
+
+{% endblock %}
+
