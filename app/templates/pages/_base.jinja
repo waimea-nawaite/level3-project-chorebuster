@@ -34,6 +34,10 @@
                 <a href="/chore/new">New Chore</a>
                 <a href="/chores">Chore List</a>
 
+                {# {% if session.user.role == "member" %}
+                    <a href="/family/leave">Leave Family</a>
+                {% endif %} #}
+
                 {% if session.user.role == "owner" %}
                     <a href="/family">Family</a>
                 {% endif %}

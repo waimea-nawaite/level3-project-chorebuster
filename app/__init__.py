@@ -316,7 +316,6 @@ def show_all_chores():
 @app.post("/chore")
 @login_required
 def add_chore():
-
     if session["user"]["role"] != "owner":
         flash("Only the family owner can create chores", "error")
         return redirect("/chores")
@@ -413,8 +412,66 @@ def delete(id):
 
         return redirect("/chores")
 
+#-----------------------------------------------------------
+# Family page - Show all users in family
+#-----------------------------------------------------------
+@app.get("/family")
+@login_required
+def show_all_users_in_family():
+    with connect_db() as db:
+        sql="""
+            SELECT
+                family.surname AS family_name,
+                family.family_code,
+                users.forename,
+                users.surname,
+                family_members.role
+            FROM family_members
+            JOIN users ON family_members.user_id = users.id
+            JOIN family ON family_members.family_id = family.id
+            WHERE family_members.family_id = (
+                SELECT family_id
+                FROM family_members
+                WHERE user_id=?
+            )
+        """
+        params = (session["user"]["id"],)
+        families = db.execute(sql, params).fetchall()
 
+        return render_template("pages/family_list.jinja", families=families)
+    
+# #-----------------------------------------------------------
+# # Leave family
+# #-----------------------------------------------------------
+# @app.get("/family/leave")
+# @login_required
+# def leave_family():
+#     with connect_db() as db:
+#         sql = """
+#             SELECT id, role
+#             FROM family_members
+#             WHERE user_id=?
+#         """
+#         params = (session["user"]["id"],)
+#         family_member = db.execute(sql, params).fetchone()
 
+#         if not family_member:
+#             flash("You are not in a family", "error")
+#             return redirect("/home_logged_in")
+
+#         if family_member["role"] == "owner":
+#             flash("The family owner cannot leave the family", "error")
+#             return redirect("/family")
+
+#         sql = """
+#             DELETE FROM family_members
+#             WHERE id=?
+#         """
+#         params = (family_member["id"],)
+#         db.execute(sql, params)
+
+#         flash("You have left the family", "success")
+#         return redirect("/")
 #===========================================================
 # Configure the app
 #===========================================================

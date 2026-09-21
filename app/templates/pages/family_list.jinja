@@ -1,0 +1,31 @@
+{#=====================================================
+  Chore List
+=====================================================#}
+
+{% extends 'pages/_base.jinja' %}
+
+{% block content %}
+
+    <h2>Family Members</h2>
+    <h3>Family Code: {{ families[0].family_code }}</h3>
+
+    {% for family in families %}
+        
+        <div>
+            <p>
+                {{ family.forename }} {{ family.surname }}
+                - {{ family.role }}
+            </p>
+
+            {# {% if session.logged_in and session.user.role == "member" %}
+                <a href="/family/leave">Leave Family</a>
+            {% endif %} #}
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
+
+
+
+{# <button id="user-button"><a href="/family_member/edit/{{ chore.mid }}">Edit</a></button> #}
