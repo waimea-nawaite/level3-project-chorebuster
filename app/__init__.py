@@ -1,6 +1,6 @@
 #===========================================================
-# PROJECT NAME HERE
-# By YOUR NAME HERE
+# ChoreBuster
+# By Ned Waite
 #===========================================================
 
 from flask import Flask, request, session, render_template, flash, redirect, send_file, make_response
@@ -13,15 +13,12 @@ import random
 import string
 from app.helpers import *
 
-
 # Create the app
 app = Flask(__name__)
-
 
 #===========================================================
 # App Routes Handlers
 #===========================================================
-
 #-----------------------------------------------------------
 # Signup Page
 #-----------------------------------------------------------
@@ -44,12 +41,19 @@ def show_login_form():
     return render_template("pages/login_page.jinja")
 
 #-----------------------------------------------------------
+# Join family page
+#-----------------------------------------------------------
+@app.get("/family/join")
+@login_required
+def show_join_family():
+    return render_template("pages/join_family.jinja")
+
+#-----------------------------------------------------------
 # New Message Page
 #-----------------------------------------------------------
 @app.get("/chore/new")
 def show_chores_form():
     return render_template("pages/chore_form.jinja")
-
 
 #-----------------------------------------------------------
 # Edit a Message Page
@@ -67,22 +71,9 @@ def add_user():
     surname  = request.form.get('surname', '').strip()
     username = request.form.get('username', '').strip().lower()
     password = request.form.get('password', '').strip()
-    family_code = request.form.get('family_code', '').strip().upper()
     points = "0"
 
     with connect_db() as db:
-        # Check that the family code exists
-        sql = """
-            SELECT id
-            FROM family
-            WHERE family_code=?
-        """
-        params = (family_code,)
-        family = db.execute(sql, params).fetchone()
-
-        if not family:
-            flash("Family code does not exist", "error")
-            return redirect("/user/new")
 
         # Check if username already exists
         sql = "SELECT id FROM users WHERE username=?"
@@ -104,23 +95,8 @@ def add_user():
         params = (forename, surname, username, password_hash, points)
         db.execute(sql, params)
 
-        # Get the newly created user's ID
-        user_id = db.execute(
-            "SELECT id FROM users WHERE username=?",
-            (username,)
-        ).fetchone()["id"]
-
-        # Add the user to the family
-        sql = """
-            INSERT INTO family_members (family_id, user_id, role)
-            VALUES (?, ?, ?)
-        """
-        params = (family["id"], user_id, "member")
-        db.execute(sql, params)
-
         flash("Account created", "success")
         return redirect("/user/login")
-
 
 #-----------------------------------------------------------
 # Handle user signup with Family
@@ -167,7 +143,6 @@ def add_user_family():
             INSERT INTO family (surname, family_code)
             VALUES (?, ?)
         """
-
         params = (family_name, family_code)
         db.execute(sql, params)
 
@@ -190,7 +165,6 @@ def add_user_family():
 #-----------------------------------------------------------
 # Handle user login
 #-----------------------------------------------------------
-    
 @app.post("/login")
 def login_user():
     username = request.form.get('username', '').strip().lower()
@@ -201,7 +175,7 @@ def login_user():
             SELECT users.id, users.forename, users.surname, users.password_hash,
             family_members.role
             FROM users
-            JOIN family_members ON users.id = family_members.user_id
+            LEFT JOIN family_members ON users.id = family_members.user_id
             WHERE users.username=?
         """
         params = (username,)
@@ -223,14 +197,63 @@ def login_user():
             "surname":  user["surname"],
             "role":     user["role"],
         }
-
         flash("Login successful", "success")
         return redirect("/")
-    
+
+#-----------------------------------------------------------
+# Join family
+#-----------------------------------------------------------
+@app.post("/family/join")
+@login_required
+def join_family():
+    family_code = request.form.get('family_code', '').strip().upper()
+    with connect_db() as db:
+        # Find the family
+        sql = """
+            SELECT id
+            FROM family
+            WHERE family_code=?
+        """
+        params = (family_code,)
+        family = db.execute(sql, params).fetchone()
+
+        if not family:
+            flash("Invalid family code", "error")
+            return redirect("/family/join")
+
+        # Check if the user is already in a family
+        sql = """
+            SELECT id
+            FROM family_members
+            WHERE user_id=?
+        """
+        params = (session["user"]["id"],)
+        current_family = db.execute(sql, params).fetchone()
+
+        if current_family:
+            flash("You are already in a family", "error")
+            return redirect("/family")
+
+        # Add the user to the family
+        sql = """
+            INSERT INTO family_members (family_id, user_id, role)
+            VALUES (?, ?, ?)
+        """
+        params = (
+            family["id"],
+            session["user"]["id"],
+            "member"
+        )
+        db.execute(sql, params)
+
+        # Update the user's session
+        session["user"]["role"] = "member"
+
+        flash("You have joined the family!", "success")
+        return redirect("/family")
 #-----------------------------------------------------------
 # Handle user logout
 #-----------------------------------------------------------
-
 @app.get("/logout")
 def logout():
     session.clear()
@@ -249,14 +272,7 @@ def show_chore_form():
 #-----------------------------------------------------------
 @app.get("/home_not_logged")
 def show_home_page():
-
-        flash("Test message")
-        flash("Test SUCCESS message", "success")
-        flash("Test INFO message", "info")
-        flash("Test WARNING message", "warning")
-        flash("Test ERROR message", "error")
-
-        return render_template("pages/home_page_not_logged.jinja")
+    return render_template("pages/home_page_not_logged.jinja")
 
 #-----------------------------------------------------------
 # Home page logged in
@@ -272,14 +288,7 @@ def show_home_page_logged_in():
         params = ()
         users = db.execute(sql, params).fetchall()
 
-        flash("Test message")
-        flash("Test SUCCESS message", "success")
-        flash("Test INFO message", "info")
-        flash("Test WARNING message", "warning")
-        flash("Test ERROR message", "error")
-
         return render_template("pages/home_page_logged_in.jinja", users=users)
-
 
 #-----------------------------------------------------------
 # Chore page - Show all chores
@@ -289,15 +298,8 @@ def show_all_chores():
     with connect_db() as db:
         sql = """
             SELECT 
-                chores.id       AS mid,
-                chores.title,
-                chores.body,
-                chores.due_time,
-                chores.points,
-                chores.complete,
-                chores.pinned,
-                users.id        AS uid,
-                users.forename
+                chores.id AS mid, chores.title, chores.body, chores.due_time, chores.points, chores.complete, chores.pinned,
+                users.id AS uid, users.forename
             
             FROM chores
             JOIN users ON chores.user_id = users.id
@@ -308,11 +310,9 @@ def show_all_chores():
 
         return render_template("pages/chore_list.jinja", chores=chores)
 
-
 #-----------------------------------------------------------
 # Handle user chore
 #-----------------------------------------------------------
-    
 @app.post("/chore")
 @login_required
 def add_chore():
@@ -335,10 +335,6 @@ def add_chore():
         flash("Body is required", "error")
         return redirect("/chore/new")
     
-    if len(body) > 200:
-        flash("Body is too long (max 200 chars)", "error")
-        return redirect("/chore/new")
-
     if len(title) > 40:
         flash("Title is too long (max 40 chars)", "error")
         return redirect("/chore/new")
@@ -421,11 +417,10 @@ def show_all_users_in_family():
     with connect_db() as db:
         sql="""
             SELECT
-                family.surname AS family_name,
-                family.family_code,
-                users.forename,
-                users.surname,
+                family.surname AS family_name, family.family_code,
+                users.forename, users.surname,
                 family_members.role
+                
             FROM family_members
             JOIN users ON family_members.user_id = users.id
             JOIN family ON family_members.family_id = family.id
@@ -439,39 +434,41 @@ def show_all_users_in_family():
         families = db.execute(sql, params).fetchall()
 
         return render_template("pages/family_list.jinja", families=families)
-    
-# #-----------------------------------------------------------
-# # Leave family
-# #-----------------------------------------------------------
-# @app.get("/family/leave")
-# @login_required
-# def leave_family():
-#     with connect_db() as db:
-#         sql = """
-#             SELECT id, role
-#             FROM family_members
-#             WHERE user_id=?
-#         """
-#         params = (session["user"]["id"],)
-#         family_member = db.execute(sql, params).fetchone()
 
-#         if not family_member:
-#             flash("You are not in a family", "error")
-#             return redirect("/home_logged_in")
+#-----------------------------------------------------------
+# Leave family
+#-----------------------------------------------------------
+@app.get("/family/leave")
+@login_required
+def leave_family():
+    with connect_db() as db:
+        sql = """
+            SELECT id, role
+            FROM family_members
+            WHERE user_id=?
+        """
+        params = (session["user"]["id"],)
+        family_member = db.execute(sql, params).fetchone()
 
-#         if family_member["role"] == "owner":
-#             flash("The family owner cannot leave the family", "error")
-#             return redirect("/family")
+        if not family_member:
+            flash("You are not in a family", "error")
+            return redirect("/home_logged_in")
 
-#         sql = """
-#             DELETE FROM family_members
-#             WHERE id=?
-#         """
-#         params = (family_member["id"],)
-#         db.execute(sql, params)
+        if family_member["role"] == "owner":
+            flash("The family owner cannot leave the family", "error")
+            return redirect("/family")
 
-#         flash("You have left the family", "success")
-#         return redirect("/")
+        sql = """
+            DELETE FROM family_members
+            WHERE id=?
+        """
+        params = (family_member["id"],)
+        db.execute(sql, params)
+
+        session["user"]["role"] = None
+
+        flash("You have left the family", "success")
+        return redirect("/")
 #===========================================================
 # Configure the app
 #===========================================================

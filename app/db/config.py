@@ -84,7 +84,7 @@ class FamilyMemberTable:
             id        INTEGER PRIMARY KEY AUTOINCREMENT,
             family_id INTEGER NOT NULL,
             user_id   INTEGER NOT NULL,
-            role      TEXT    NOT NULL DEFAULT ('member'),
+            role      TEXT    NOT NULL DEFAULT 'member',
 
             FOREIGN KEY(family_id) REFERENCES family(id),
             FOREIGN KEY(user_id) REFERENCES users(id)

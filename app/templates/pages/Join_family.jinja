@@ -1,0 +1,21 @@
+{#=====================================================
+  Join a family with a code
+=====================================================#}
+{% extends 'pages/_base.jinja' %}
+
+{% block content %}
+
+    <h2>Join a Family</h2>
+
+    <form method="post" action="/family/join">
+
+        <label>
+            Family Code
+            <input type="text" name="family_code" required>
+        </label>
+
+        <button>Join Family</button>
+
+    </form>
+
+{% endblock %}
