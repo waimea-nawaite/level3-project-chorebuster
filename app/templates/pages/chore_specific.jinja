@@ -1,4 +1,4 @@
-{#=====================================================
+{# {#=====================================================
   Chore List
 =====================================================#}
 
@@ -14,19 +14,18 @@
         {% for chore in chores %}
 
             <div class="chore-card">
-                <a class="pin-button" href="/chore/pin/{{ chore.id }}">
-                    {{ "📌" if chore.pinned }}
-                </a>
-                <h3>{{ chore.title }}</h3>
-
+                <label>
+                    <h3>{{ "📌" if chore.pinned }} {{ chore.title }}</h3>
+                    <input type="checkbox">
+                </label>
                 <div class="chore-due">
                     Due: {{chore.due_time}}
                 </div>
 
                 <div class="chore-bottom">
                 {% if session.logged_in and chore.uid == session.user.id %}
-                    <a class="chore-button" href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a>
-                    <a class="chore-button" href="/chore/edit/{{ chore.mid }}">Edit</a>
+                    <button id="chore-button"><a href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a></button>
+                    <button id="chore-button"><a href="/chore/edit/{{ chore.mid }}">Edit</a></button>
                 {% endif %}
                 </div>
 
@@ -40,7 +39,7 @@
 
     </section>
 
-{% endblock %}
-
+{% endblock %} #}
+Make this page show the everything about the chore and a complete button to give out the points
 
 

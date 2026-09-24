@@ -357,6 +357,21 @@ def add_chore():
 
         flash(f"Chore added")
         return redirect("/chore/new")
+
+#-----------------------------------------------------------
+# Pin a chore
+#-----------------------------------------------------------
+@app.get("/chore/pin/<int:id>")
+@login_required
+def pin_chore(id):
+    with connect_db() as db:
+        sql = """
+            UPDATE chores
+            SET pinned=1
+            WHERE id=?
+        """
+        db.execute(sql, (id,))
+    return redirect("/chores")
     
 #-----------------------------------------------------------
 # Edit chore
@@ -380,6 +395,27 @@ def edit(id):
         params = [id]
         chore = db.execute(sql, params).fetchone()
         return render_template("pages/chore_edit.jinja", chore=chore)
+
+#-----------------------------------------------------------
+# Post Edit
+#-----------------------------------------------------------
+@app.post("/chore/edit/<int:id>")
+@login_required
+def edit_post(id):
+    title = request.form.get("title", "").strip()
+    body  = request.form.get("body", "").strip()
+
+    with connect_db() as db:
+        sql = """
+            UPDATE chores
+            SET title=?, body=?
+            WHERE id=?
+        """
+        params = [title, body, id]
+        db.execute(sql, params)
+
+        flash("Message updated", "success")
+        return redirect("/chores")
 
 #-----------------------------------------------------------
 # Delete a chore

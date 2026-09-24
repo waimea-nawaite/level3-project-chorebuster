@@ -49,7 +49,7 @@ class ChoreTable:
             due_time TIME,
             points   INTEGER DEFAULT (0),
             complete INTEGER DEFAULT (0),
-            pinned  INTEGER DEFAULT 0,
+            pinned  INTEGER DEFAULT (0),
 
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
