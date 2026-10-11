@@ -14,14 +14,21 @@
         {% for chore in chores %}
 
             <div class="chore-card">
-                <a class="pin-button" href="/chore/pin/{{ chore.id }}">
-                    {{ "📌" if chore.pinned }}
-                </a>
-                <h3>{{ chore.title }}</h3>
+                <h3>{{chore.title}}</h3>
 
                 <div class="chore-due">
-                    Due: {{chore.due_time}}
+                    Body: {{chore.body}}
                 </div>
+
+                <div class="chore-due">
+                    Due at: {{chore.due_time}}
+                </div>
+
+                <div class="chore-points">
+                    Points: {{chore.points}}
+                </div>
+                
+                <a class="chore-button" href="/chore/complete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Complete</a>
 
                 <div class="chore-bottom">
                 {% if session.logged_in and chore.uid == session.user.id %}

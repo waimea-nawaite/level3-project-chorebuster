@@ -298,12 +298,11 @@ def show_all_chores():
     with connect_db() as db:
         sql = """
             SELECT 
-                chores.id AS mid, chores.title, chores.body, chores.due_time, chores.points, chores.complete, chores.pinned,
+                chores.id AS mid, chores.title, chores.body, chores.due_time, chores.points, chores.complete,
                 users.id AS uid, users.forename
             
             FROM chores
             JOIN users ON chores.user_id = users.id
-            ORDER BY pinned DESC
         """
         params = ()
         chores = db.execute(sql, params).fetchall()
@@ -311,7 +310,7 @@ def show_all_chores():
         return render_template("pages/chore_list.jinja", chores=chores)
 
 #-----------------------------------------------------------
-# Handle user chore
+# Add a new chore
 #-----------------------------------------------------------
 @app.post("/chore")
 @login_required
@@ -359,21 +358,6 @@ def add_chore():
         return redirect("/chore/new")
 
 #-----------------------------------------------------------
-# Pin a chore
-#-----------------------------------------------------------
-@app.get("/chore/pin/<int:id>")
-@login_required
-def pin_chore(id):
-    with connect_db() as db:
-        sql = """
-            UPDATE chores
-            SET pinned=1
-            WHERE id=?
-        """
-        db.execute(sql, (id,))
-    return redirect("/chores")
-    
-#-----------------------------------------------------------
 # Edit chore
 #-----------------------------------------------------------
 @app.get("/chore/edit/<int:id>")
@@ -385,6 +369,8 @@ def edit(id):
                 chores.id     AS mid,
                 chores.title,
                 chores.body,
+                chores.due_time,
+                chores.points,
                 users.id        AS uid,
                 users.forename
 

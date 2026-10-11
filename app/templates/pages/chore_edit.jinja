@@ -17,6 +17,11 @@
     <label>Body</label>
     <textarea name="body">{{ chore.body }}</textarea>
 
+    <label>Due time</label>
+    <input type="int"
+           name="due_time"
+           value="{{ chore.due_time }}">
+
     <button type="submit">
         Save Changes
     </button>

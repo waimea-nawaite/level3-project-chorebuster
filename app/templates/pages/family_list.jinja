@@ -16,16 +16,8 @@
                 {{ family.forename }} {{ family.surname }}
                 - {{ family.role }}
             </p>
-
-            {# {% if session.logged_in and session.user.role == "member" %}
-                <a href="/family/leave">Leave Family</a>
-            {% endif %} #}
         </div>
 
     {% endfor %}
 
 {% endblock %}
-
-
-
-{# <button id="user-button"><a href="/family_member/edit/{{ chore.mid }}">Edit</a></button> #}
