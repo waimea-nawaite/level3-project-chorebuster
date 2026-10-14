@@ -28,7 +28,6 @@ class UserTable:
             surname       TEXT    NOT NULL,
             username      TEXT    NOT NULL,
             password_hash TEXT    NOT NULL,
-            points        INTEGER DEFAULT (0)
         )
     """
 
@@ -47,7 +46,6 @@ class ChoreTable:
             title    TEXT    NOT NULL,
             body     TEXT    NOT NULL,
             due_time TIME,
-            points   INTEGER DEFAULT (0),
             complete INTEGER DEFAULT (0),
             completed_by  INTEGER DEFAULT NULL,
 
@@ -65,9 +63,9 @@ class FamilyTable:
 
     SCHEMA = """
         CREATE TABLE family (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
-            surname     TEXT    NOT NULL,
-            family_code TEXT NOT NULL UNIQUE
+            id              INTEGER  PRIMARY KEY AUTOINCREMENT,
+            family_surname  TEXT     NOT NULL,
+            family_code     TEXT NOT NULL UNIQUE
         )
     """
 

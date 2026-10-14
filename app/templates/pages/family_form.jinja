@@ -1,0 +1,22 @@
+{#=====================================================*
+  Create Family form
+*=====================================================#}
+
+{% extends 'pages/_base.jinja' %}
+
+{% block content %}
+
+    <h2>Create Family</h2>
+
+    <form method="post" action="/family/create">
+
+      <label>
+        Family Name
+        <input type="text" name="family_name" required>
+      </label>
+
+      <button>Submit</button>
+      
+    </form>
+
+{% endblock %}

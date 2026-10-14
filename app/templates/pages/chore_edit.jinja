@@ -12,14 +12,16 @@
     <label>Title</label>
     <input type="text"
            name="title"
+           placeholder="e.g. Dinner"
            value="{{ chore.title }}">
 
     <label>Body</label>
-    <textarea name="body">{{ chore.body }}</textarea>
+    <textarea placeholder="e.g. Noodles with meat" name="body">{{ chore.body }} </textarea>
 
     <label>Due time</label>
     <input type="int"
            name="due_time"
+           placeholder="Write the actual time e.g. 15:30"
            value="{{ chore.due_time }}">
 
     <button type="submit">

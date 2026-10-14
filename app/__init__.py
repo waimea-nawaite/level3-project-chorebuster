@@ -27,11 +27,11 @@ def show_signup_form():
     return render_template("pages/user_form.jinja")
 
 #-----------------------------------------------------------
-# Signup Page
+# Family create Page
 #-----------------------------------------------------------
-@app.get("/user/new/family")
+@app.get("/family/create")
 def show_signup_family_form():
-    return render_template("pages/user_form_family.jinja")
+    return render_template("pages/family_form.jinja")
 
 #-----------------------------------------------------------
 # Login Page
@@ -71,7 +71,6 @@ def add_user():
     surname  = request.form.get('surname', '').strip()
     username = request.form.get('username', '').strip().lower()
     password = request.form.get('password', '').strip()
-    points = "0"
 
     with connect_db() as db:
 
@@ -89,58 +88,57 @@ def add_user():
 
         # Create the user
         sql = """
-            INSERT INTO users (forename, surname, username, password_hash, points)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO users (forename, surname, username, password_hash)
+            VALUES (?, ?, ?, ?)
         """
-        params = (forename, surname, username, password_hash, points)
+        params = (forename, surname, username, password_hash)
         db.execute(sql, params)
 
         flash("Account created", "success")
         return redirect("/user/login")
 
+
 #-----------------------------------------------------------
-# Handle user signup with Family
+# Handle create family
 #-----------------------------------------------------------
-@app.post("/user/family")
-def add_user_family():
-    forename = request.form.get('forename', '').strip()
-    surname  = request.form.get('surname',  '').strip()
-    username = request.form.get('username', '').strip().lower()
-    password = request.form.get('password', '').strip()
+@app.post("/family/create")
+@login_required
+def create_a_family():
     family_name = request.form.get('family_name', '').strip()
-    points = "0"
-
+    if not family_name:
+        flash("Please enter a family name", "error")
+        return redirect("/family/create")
+    
     with connect_db() as db:
-        sql = "SELECT id FROM users WHERE username=?"
-        params = (username,)
-        user = db.execute(sql, params).fetchone()
+        # Check whether the family name already exists
+        sql = "SELECT id FROM family WHERE family_surname=?"
+        params = (family_name,)
+        family = db.execute(sql, params).fetchone()
 
-        if user:
-            flash(f"Username '{username}' already exists", "error")
-            return redirect("/user/new")
+        if family:
+            flash(f"Family name '{family_name}' already exists", "error")
+            return redirect("/family/create")
 
-        password_hash = generate_password_hash(password)
+        # Get the logged-in user's ID
+        user_id = session["user"]["id"]
 
-        # Create the user
-        sql = """
-            INSERT INTO users (forename, surname, username, password_hash, points)
-            VALUES (?, ?, ?, ?, ?)
-        """
-        params = (forename, surname, username, password_hash, points)
-        db.execute(sql, params)
+        # Check whether the user already belongs to a family
+        sql = "SELECT id FROM family_members WHERE user_id=?"
+        params = (user_id,)
+        member = db.execute(sql, params).fetchone()
 
-        # Get the new user's ID
-        user_id = db.execute(
-            "SELECT id FROM users WHERE username=?",
-            (username,)
-        ).fetchone()["id"]
+        if member:
+            flash("You already belong to a family", "error")
+            return redirect("/")
 
         # Generate a family code
-        family_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        family_code = ''.join(
+            random.choices(string.ascii_uppercase + string.digits, k=6)
+        )
 
         # Create the family
         sql = """
-            INSERT INTO family (surname, family_code)
+            INSERT INTO family (family_surname, family_code)
             VALUES (?, ?)
         """
         params = (family_name, family_code)
@@ -160,8 +158,12 @@ def add_user_family():
         params = (family_id, user_id, "owner")
         db.execute(sql, params)
 
-        flash(f"Family created! Your family code is {family_code}", "success")
-        return redirect("/user/login")
+    # Update the user's session role
+    session["user"]["role"] = "owner"
+
+    flash(f"Family created! Your family code is {family_code}", "success")
+    return redirect("/")
+
 #-----------------------------------------------------------
 # Handle user login
 #-----------------------------------------------------------
@@ -298,17 +300,31 @@ def show_all_chores():
     with connect_db() as db:
         sql = """
             SELECT 
-                chores.id AS mid, chores.title, chores.body, chores.due_time, chores.points, chores.complete,
-                users.id AS uid, users.forename
-            
+                chores.id AS mid,
+                chores.title,
+                chores.body,
+                chores.due_time,
+                chores.complete,
+                users.id AS uid,
+                users.forename
+
             FROM chores
             JOIN users ON chores.user_id = users.id
+
+            WHERE chores.user_id IN (
+                    SELECT user_id
+                    FROM family_members
+                    WHERE family_id = (
+                        SELECT family_id
+                        FROM family_members
+                        WHERE user_id = ?
+                    )
+            )
         """
-        params = ()
+        params = (session["user"]["id"],)
         chores = db.execute(sql, params).fetchall()
 
         return render_template("pages/chore_list.jinja", chores=chores)
-
 #-----------------------------------------------------------
 # Add a new chore
 #-----------------------------------------------------------
@@ -323,7 +339,6 @@ def add_chore():
     title    = request.form.get('title', '').strip()
     body     = request.form.get('body', '').strip()
     due_time = request.form.get('due_time', '').strip()
-    points   = request.form.get('points', '').strip()
 
     # Validate data
     if not title:
@@ -348,10 +363,10 @@ def add_chore():
     # Add to the database
     with connect_db() as db:
         sql = """
-            INSERT INTO chores (user_id, title, body, due_time, points)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT INTO chores (user_id, title, body, due_time)
+            VALUES (?, ?, ?, ?)
         """
-        params = (user_id, title, body, due_time, points)
+        params = (user_id, title, body, due_time)
         db.execute(sql, params)
 
         flash(f"Chore added")
@@ -370,7 +385,6 @@ def edit(id):
                 chores.title,
                 chores.body,
                 chores.due_time,
-                chores.points,
                 users.id        AS uid,
                 users.forename
 
@@ -394,10 +408,10 @@ def edit_post(id):
     with connect_db() as db:
         sql = """
             UPDATE chores
-            SET title=?, body=?
+            SET title=?, body=?, due_time=?
             WHERE id=?
         """
-        params = [title, body, id]
+        params = [title, body, due_time, id]
         db.execute(sql, params)
 
         flash("Message updated", "success")
@@ -439,7 +453,7 @@ def show_all_users_in_family():
     with connect_db() as db:
         sql="""
             SELECT
-                family.surname AS family_name, family.family_code,
+                family.family_surname AS family_name, family.family_code,
                 users.forename, users.surname,
                 family_members.role
                 
