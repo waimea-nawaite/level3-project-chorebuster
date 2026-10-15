@@ -404,6 +404,7 @@ def edit(id):
 def edit_post(id):
     title = request.form.get("title", "").strip()
     body  = request.form.get("body", "").strip()
+    due_time = request.form.get("due_time", "").strip()
 
     with connect_db() as db:
         sql = """
@@ -443,6 +444,28 @@ def delete(id):
             flash("The chore has been deleted", "success")
 
         return redirect("/chores")
+
+# #-----------------------------------------------------------
+# # A complete chore
+# #-----------------------------------------------------------
+@app.get("/complete/<int:id>")
+def complete_chore(id):
+    with connect_db() as client:
+        sql = "UPDATE chores SET complete=1 WHERE id=?"
+        values = [id]
+        client.execute(sql, values)
+    return redirect("/chores")
+    
+# #-----------------------------------------------------------
+# # A incomplete chore
+# #-----------------------------------------------------------
+@app.get("/incomplete/<int:id>")
+def incomplete_chore(id):
+    with connect_db() as client:
+        sql = "UPDATE chores SET complete=0 WHERE id=?"
+        values = [id]
+        client.execute(sql, values)
+    return redirect("/chores")
 
 #-----------------------------------------------------------
 # Family page - Show all users in family

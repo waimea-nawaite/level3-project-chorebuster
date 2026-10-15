@@ -46,8 +46,7 @@ class ChoreTable:
             title    TEXT    NOT NULL,
             body     TEXT    NOT NULL,
             due_time TIME,
-            complete INTEGER DEFAULT (0),
-            completed_by  INTEGER DEFAULT NULL,
+            complete INTEGER DEFAULT (0)
 
             FOREIGN KEY(user_id) REFERENCES users(id)
         )

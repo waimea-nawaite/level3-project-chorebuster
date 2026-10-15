@@ -23,11 +23,14 @@
                 <div class="chore-due">
                     Due at: {{chore.due_time}}
                 </div>
-                
-                <a class="chore-button" href="/chore/complete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Complete</a>
 
                 <div class="chore-bottom">
                 {% if session.logged_in and chore.uid == session.user.id %}
+                    {% if chore.complete %} 
+                    <a class="chore-button" href="/incomplete/{{ chore.mid }}">🗹</a>
+                    {% else %} 
+                    <a class="chore-button" href="/complete/{{ chore.mid }}">☐</a>
+                    {% endif %}
                     <a class="chore-button" href="/chore/delete/{{ chore.mid }}" onclick="return confirm('Are you sure?');">Delete</a>
                     <a class="chore-button" href="/chore/edit/{{ chore.mid }}">Edit</a>
                 {% endif %}

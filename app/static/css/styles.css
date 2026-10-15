@@ -44,7 +44,7 @@ body > header {
     gap: 1rem;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1.5rem;
 
     nav {
         display: flex;
@@ -78,7 +78,6 @@ main > h2 {
 }
 
 .chore-card h3 {
-  
     margin: 0 0 15px 0;
     font-size: 30px;
 }
@@ -97,7 +96,7 @@ main > h2 {
 .chore-bottom {
     justify-content: first baseline;
     align-items: center;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .chore-button {
