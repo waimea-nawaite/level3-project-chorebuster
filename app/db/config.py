@@ -26,8 +26,8 @@ class UserTable:
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
             forename      TEXT    NOT NULL,
             surname       TEXT    NOT NULL,
-            username      TEXT    NOT NULL,
-            password_hash TEXT    NOT NULL,
+            username      TEXT    NOT NULL UNIQUE,
+            password_hash TEXT    NOT NULL
         )
     """
 
@@ -46,7 +46,7 @@ class ChoreTable:
             title    TEXT    NOT NULL,
             body     TEXT    NOT NULL,
             due_time TIME,
-            complete INTEGER DEFAULT (0)
+            complete INTEGER DEFAULT (0),
 
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
