@@ -292,14 +292,11 @@ def show_home_page_logged_in():
 
         return render_template("pages/home_page_logged_in.jinja", users=users)
 
-#-----------------------------------------------------------
-# Chore page - Show all chores
-#-----------------------------------------------------------
 @app.get("/chores")
 def show_all_chores():
     with connect_db() as db:
         sql = """
-            SELECT 
+            SELECT
                 chores.id AS mid,
                 chores.title,
                 chores.body,
@@ -307,20 +304,19 @@ def show_all_chores():
                 chores.complete,
                 users.id AS uid,
                 users.forename
-
             FROM chores
+
             JOIN users ON chores.user_id = users.id
 
-            WHERE chores.user_id IN (
-                    SELECT user_id
-                    FROM family_members
-                    WHERE family_id = (
-                        SELECT family_id
-                        FROM family_members
-                        WHERE user_id = ?
-                    )
+            JOIN family_members ON users.id = family_members.user_id
+
+            WHERE family_members.family_id = (
+                SELECT family_id
+                FROM family_members
+                WHERE user_id = ?
             )
         """
+
         params = (session["user"]["id"],)
         chores = db.execute(sql, params).fetchall()
 
@@ -351,6 +347,9 @@ def add_chore():
     
     if len(title) > 40:
         flash("Title is too long (max 40 chars)", "error")
+        return redirect("/chore/new")
+    if len(body) > 100:
+        flash("Body is too long (max 40 chars)", "error")
         return redirect("/chore/new")
 
     # Escape text inputs
