@@ -29,7 +29,7 @@
         <nav>
             {% if session.logged_in %}
                 <li>Welcome, {{ session.user.username }}!</li>
-                <a href="/">Home</a>
+                <a href="/home_logged">Home</a>
                 <a href="/logout" onclick="return confirm('Are you sure?');">Logout</a>
                 
                 {% if not session.user.role %}
@@ -51,7 +51,7 @@
                 {% endif %}
 
             {% else %}
-                <a href="/home_not_logged">Start Page</a>
+                <a href="/">Start Page</a>
                 <a href="/user/login">Login</a>
                 <a href="/user/new">Sign-Up</a>
             {% endif %} 

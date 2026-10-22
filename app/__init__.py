@@ -162,7 +162,7 @@ def create_a_family():
     session["user"]["role"] = "owner"
 
     flash(f"Family created! Your family code is {family_code}", "success")
-    return redirect("/")
+    return redirect("/home_logged")
 
 #-----------------------------------------------------------
 # Handle user login
@@ -200,7 +200,7 @@ def login_user():
             "role":     user["role"],
         }
         flash("Login successful", "success")
-        return redirect("/")
+        return redirect("/home_logged")
 
 #-----------------------------------------------------------
 # Join family
@@ -260,7 +260,7 @@ def join_family():
 def logout():
     session.clear()
     flash(f"You have been logged out", "success")
-    return redirect("/home_not_logged")
+    return redirect("/")
 
 #-----------------------------------------------------------
 # New Chore Page
@@ -272,14 +272,14 @@ def show_chore_form():
 #-----------------------------------------------------------
 # Home page not logged in
 #-----------------------------------------------------------
-@app.get("/home_not_logged")
+@app.get("/")
 def show_home_page():
     return render_template("pages/home_page_not_logged.jinja")
 
 #-----------------------------------------------------------
 # Home page logged in
 #-----------------------------------------------------------
-@app.get("/")
+@app.get("/home_logged")
 def show_home_page_logged_in():
     with connect_db() as db:
         sql = """
@@ -291,7 +291,10 @@ def show_home_page_logged_in():
         users = db.execute(sql, params).fetchall()
 
         return render_template("pages/home_page_logged_in.jinja", users=users)
-
+    
+#-----------------------------------------------------------
+# Chores page - show all chores
+#-----------------------------------------------------------
 @app.get("/chores")
 def show_all_chores():
     with connect_db() as db:
@@ -526,7 +529,7 @@ def leave_family():
         session["user"]["role"] = None
 
         flash("You have left the family", "success")
-        return redirect("/")
+        return redirect("/home_logged")
 #===========================================================
 # Configure the app
 #===========================================================
