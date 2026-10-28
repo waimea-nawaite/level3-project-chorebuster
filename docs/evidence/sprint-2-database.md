@@ -21,45 +21,40 @@ Implement the database, populated with test data. Create queries that retrieve t
     - Etc.
 
 
-## Testing FEATURE NAME HERE
+## Testing Database and test data
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+I am testing to see if the database has the correct tables, columns and data inside.
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
-
-![Placeholder](screenshots/placeholder.png)
+![Alt text](screenshots/Showing-database1.png)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+I added a complete column to allow the user to say its done and a role column so that there would be owners and members giving certain privileges.
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+![Alt text](screenshots/Showing-database.png)
 
+## Testing Displaying chores
 
-## Testing FEATURE NAME HERE
+I am going to open my Chore List page and check that the chore titles, bodys, due times and points display correctly.
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
-
-### Changes / Improvements
-
-Replace this text with notes any improvements you made as a result of the testing.
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
-
-
-## Testing FEATURE NAME HERE
-
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+![Alt text](screenshots/Show_chore1.png)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+I decided to remove the point system I didnt like the idea and improved the due time to a calender that gives you options for the exact date and time
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+![Alt text](screenshots/show-chore2.png)
+
+
+## Testing Displaying family members
+
+I will open the Family page and check that the family code, names and roles display correctly.
+
+![Alt text](screenshots/Family-page1.png)
+
+### Changes / Improvements
+
+No changes were required following testing, as the feature worked as expected. The test results confirmed that the feature functioned correctly.
 
 
 ## ETC...

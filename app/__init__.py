@@ -515,10 +515,6 @@ def leave_family():
             flash("You are not in a family", "error")
             return redirect("/home_logged_in")
 
-        if family_member["role"] == "owner":
-            flash("The family owner cannot leave the family", "error")
-            return redirect("/family")
-
         sql = """
             DELETE FROM family_members
             WHERE id=?

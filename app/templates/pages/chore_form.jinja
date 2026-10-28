@@ -20,10 +20,14 @@
           <textarea name="body" placeholder="e.g. Noodles with meat" required></textarea>
       </label>
 
-      <label>
-          Due Time
-          <textarea name="due_time" placeholder="Show in 24H clock e.g. 15:30" required></textarea>
-      </label>
+      <label for="due_time">Due Date and Time:</label>
+
+      <input
+          type="datetime-local"
+          id="due_time"
+          name="due_time"
+          required
+      >
 
       <button>Add Chore</button>
   </form>

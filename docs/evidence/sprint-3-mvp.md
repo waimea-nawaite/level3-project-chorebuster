@@ -17,13 +17,22 @@ Continue to develop the web application to the point that it provides all key fu
     - Etc.
 
 
-## Testing FEATURE NAME HERE
+## Testing User Sign-up and Login
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+I will test to see if a user can create an account and then log into that account
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+![Alt text](<screenshots/Logging into account1.gif>)
 
-![Placeholder](screenshots/placeholder.png)
+### Changes / Improvements
+
+No changes were required following testing, as the feature worked as expected. The test results confirmed that the feature functioned correctly.
+
+
+## Testing Create Family
+
+I will be testing to see if creating a family makes you the owner and generates a code
+
+![Alt text](<screenshots/Creating family.gif>)
 
 ### Changes / Improvements
 
@@ -32,30 +41,17 @@ Replace this text with notes any improvements you made as a result of the testin
 **PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
 
 
-## Testing FEATURE NAME HERE
+## Testing Joining Family
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+I will be testing to see if joining an already made family with a family code works and sets the users role to member
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
-
-### Changes / Improvements
-
-Replace this text with notes any improvements you made as a result of the testing.
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
-
-
-## Testing FEATURE NAME HERE
-
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+![Alt text](<screenshots/Joining family.gif>)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+With the previous version it set the users role as a owner which is bad after some searching in the code I found the issue
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+![Alt text](<screenshots/Joining family fix.gif>)
 
 
 ## ETC...

@@ -113,5 +113,4 @@ I changed almost all of the boxes to have a radius and I agree it looks very nea
 
 ## Sprint Review
 
-Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.
-
+The sprint has progressed really well I like how the website looks and the webpages although I am thinking about not doing a points system for the leaderboard

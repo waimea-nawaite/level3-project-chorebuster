@@ -37,10 +37,6 @@
                     <a href="/family/create">Create Family</a>
                 {% endif %}
 
-                {% if session.user.role == "member" %}
-                    <a href="/family/leave" onclick="return confirm('Are you sure?');">leave Family</a>
-                {% endif %}
-
                 {% if session.user.role == "owner" %}
                     <a href="/chore/new">New Chore</a>
                 {% endif %}
@@ -48,6 +44,7 @@
                 {% if session.user.role %}
                     <a href="/chores">Chore List</a>
                     <a href="/family">Family</a>
+                    <a href="/family/leave" onclick="return confirm('Are you sure?');">leave Family</a>
                 {% endif %}
 
             {% else %}
