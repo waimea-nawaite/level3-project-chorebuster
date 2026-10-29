@@ -45,6 +45,7 @@ class ChoreTable:
             user_id  INTEGER NOT NULL,
             title    TEXT    NOT NULL,
             body     TEXT    NOT NULL,
+            priority INTEGER NOT NULL,
             due_time TIME,
             complete INTEGER DEFAULT (0),
 

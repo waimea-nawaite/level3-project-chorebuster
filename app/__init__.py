@@ -303,6 +303,7 @@ def show_all_chores():
                 chores.id AS mid,
                 chores.title,
                 chores.body,
+                chores.priority,
                 chores.due_time,
                 chores.complete,
                 users.id AS uid,
@@ -337,6 +338,7 @@ def add_chore():
     # Get form data
     title    = request.form.get('title', '').strip()
     body     = request.form.get('body', '').strip()
+    priority = int(request.form.get("priority"))
     due_time = request.form.get('due_time', '').strip()
 
     # Validate data
@@ -348,6 +350,18 @@ def add_chore():
         flash("Body is required", "error")
         return redirect("/chore/new")
     
+    if not priority:
+        flash("Priority is required", "error")
+        return redirect("/chore/new")
+    
+    if not due_time:
+        flash("Due time is required", "error")
+        return redirect("/chore/new")
+    
+    if priority < 1 or priority > 5:
+        flash("Priority should be between 1 and 5", "error")
+        return redirect("/chore/new")
+
     if len(title) > 40:
         flash("Title is too long (max 40 chars)", "error")
         return redirect("/chore/new")
@@ -358,6 +372,7 @@ def add_chore():
     # Escape text inputs
     title = html.escape(title)
     body = html.escape(body)
+    due_time = html.escape(due_time)
 
     # User id is in the session
     user_id = session["user"]["id"]
@@ -365,10 +380,10 @@ def add_chore():
     # Add to the database
     with connect_db() as db:
         sql = """
-            INSERT INTO chores (user_id, title, body, due_time)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO chores (user_id, title, body, priority, due_time)
+            VALUES (?, ?, ?, ?, ?)
         """
-        params = (user_id, title, body, due_time)
+        params = (user_id, title, body, priority, due_time)
         db.execute(sql, params)
 
         flash(f"Chore added")
@@ -386,6 +401,7 @@ def edit(id):
                 chores.id     AS mid,
                 chores.title,
                 chores.body,
+                chores.priority,
                 chores.due_time,
                 users.id        AS uid,
                 users.forename
@@ -406,15 +422,16 @@ def edit(id):
 def edit_post(id):
     title = request.form.get("title", "").strip()
     body  = request.form.get("body", "").strip()
+    priority = request.form.get("priority", "").strip()
     due_time = request.form.get("due_time", "").strip()
 
     with connect_db() as db:
         sql = """
             UPDATE chores
-            SET title=?, body=?, due_time=?
+            SET title=?, body=?, priority=?, due_time=?
             WHERE id=?
         """
-        params = [title, body, due_time, id]
+        params = [title, body, priority, due_time, id]
         db.execute(sql, params)
 
         flash("Message updated", "success")
