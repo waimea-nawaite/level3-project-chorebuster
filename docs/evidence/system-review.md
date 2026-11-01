@@ -2,14 +2,16 @@
 
 ## Addressing Relevant Implications
 
-### NAME OF IMPLICATION 1
+### Usability
 
-Replace this text with notes about what you did during the project to address the implication - design features, etc.
+To address this implication I made sure to think as a user that would first open the website and be able to use it well by making it have simple instructions
+clear buttons and where each click would take you
 
 
-### NAME OF IMPLICATION 2
+### Privacy
 
-Replace this text with notes about what you did during the project to address the implication - design features, etc.
+To address this implication I made sure to safely store information that could harm the user and that the website only asks for infomation from the user that
+is important and not unnessary
 
 
 ### NAME OF IMPLICATION 3

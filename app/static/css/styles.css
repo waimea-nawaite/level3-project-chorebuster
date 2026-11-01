@@ -122,12 +122,24 @@ main > h2 {
     overflow-wrap: anywhere;
 }
 
-.chore-due {
+.chore-look {
     text-align: left;
     font-size: 16px;
     line-height: 1.5;
     margin-bottom: 12px;
     overflow-wrap: anywhere;
+}
+
+.priority-3 {
+    border-left: 6px solid #d32f2f;
+}
+
+.priority-2 {
+    border-left: 6px solid #f57c00;
+}
+
+.priority-1 {
+    border-left: 6px solid #fbc02d;
 }
 
 .chore-bottom {
@@ -170,7 +182,6 @@ main > h2 {
 
 /* Forms */
 input,
-textarea,
 select {
     background: var(--back-col-input);
     color: #202020;
@@ -178,12 +189,9 @@ select {
     border-radius: var(--radius-small);
     padding: 10px;
     font: inherit;
-    
-
 }
 
 input:focus,
-textarea:focus,
 select:focus {
     outline: 2px solid var(--info-col);
     outline-offset: 1px;

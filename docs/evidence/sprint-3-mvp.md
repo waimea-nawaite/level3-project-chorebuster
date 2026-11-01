@@ -25,7 +25,7 @@ I will test to see if a user can create an account and then log into that accoun
 
 ### Changes / Improvements
 
-No changes were required following testing, as the feature worked as expected. The test results confirmed that the feature functioned correctly.
+No improvements or changes were required because the feature worked as expected as the test results showed it worked as intended
 
 
 ## Testing Create Family
@@ -36,9 +36,7 @@ I will be testing to see if creating a family makes you the owner and generates 
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+No improvements or changes were required because the feature worked as expected as the test results showed it worked as intended
 
 
 ## Testing Joining Family

@@ -13,18 +13,18 @@
 
         {% for chore in chores %}
 
-            <div class="chore-card">
+            <div class="chore-card priority-{{ chore.priority }}">
                 <h3>{{chore.title}}</h3>
 
-                <div class="chore-due">
+                <div class="chore-look">
                     Body: {{chore.body}}
                 </div>
 
-                <div class="chore-due">
+                <div class="chore-look">
                     priority: {{chore.priority}}
                 </div>
 
-                <div class="chore-due">
+                <div class="chore-look">
                     Due at: {{chore.due_time}}
                 </div>
 

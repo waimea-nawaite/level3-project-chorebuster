@@ -20,6 +20,13 @@ app = Flask(__name__)
 # App Routes Handlers
 #===========================================================
 #-----------------------------------------------------------
+# Home page not logged in
+#-----------------------------------------------------------
+@app.get("/")
+def show_home_page():
+    return render_template("pages/home_page_not_logged.jinja")
+
+#-----------------------------------------------------------
 # Signup Page
 #-----------------------------------------------------------
 @app.get("/user/new")
@@ -63,6 +70,22 @@ def edit_message_form():
     return render_template("pages/chore_edit.jinja")
 
 #-----------------------------------------------------------
+# Handle user logout
+#-----------------------------------------------------------
+@app.get("/logout")
+def logout():
+    session.clear()
+    flash(f"You have been logged out", "success")
+    return redirect("/")
+
+#-----------------------------------------------------------
+# New Chore Page
+#-----------------------------------------------------------
+@app.get("/chore/new")
+def show_chore_form():
+    return render_template("pages/chore_form.jinja")
+
+#-----------------------------------------------------------
 # Handle user signup
 #-----------------------------------------------------------
 @app.post("/user")
@@ -97,7 +120,61 @@ def add_user():
         flash("Account created", "success")
         return redirect("/user/login")
 
+#-----------------------------------------------------------
+# Handle user login
+#-----------------------------------------------------------
+@app.post("/login")
+def login_user():
+    username = request.form.get('username', '').strip().lower()
+    password = request.form.get('password', '').strip()
 
+    # Collect the data from the db
+    with connect_db() as db:
+        sql = """
+            SELECT users.id, users.forename, users.surname, users.password_hash,
+            family_members.role
+            FROM users
+            LEFT JOIN family_members ON users.id = family_members.user_id
+            WHERE users.username=?
+        """
+        params = (username,)
+        user = db.execute(sql, params).fetchone()
+
+        if not user:
+            flash(f"Unknown user", "error")
+            return redirect("/user/login")
+
+        if not check_password_hash(user["password_hash"], password):
+            flash(f"Incorrect password", "error")
+            return redirect("/user/login")
+
+        session["logged_in"] = True
+        session["user"] = {
+            "id":       user["id"],
+            "username": username,
+            "forename": user["forename"],
+            "surname":  user["surname"],
+            "role":     user["role"],
+        }
+        flash("Login successful", "success")
+        return redirect("/home_logged")
+
+#-----------------------------------------------------------
+# Home page logged in
+#-----------------------------------------------------------
+@app.get("/home_logged")
+def show_home_page_logged_in():
+    with connect_db() as db:
+        sql = """
+            SELECT 
+            *
+            FROM users
+        """
+        params = ()
+        users = db.execute(sql, params).fetchall()
+
+        return render_template("pages/home_page_logged_in.jinja", users=users)
+    
 #-----------------------------------------------------------
 # Handle create family
 #-----------------------------------------------------------
@@ -165,44 +242,6 @@ def create_a_family():
     return redirect("/home_logged")
 
 #-----------------------------------------------------------
-# Handle user login
-#-----------------------------------------------------------
-@app.post("/login")
-def login_user():
-    username = request.form.get('username', '').strip().lower()
-    password = request.form.get('password', '').strip()
-
-    with connect_db() as db:
-        sql = """
-            SELECT users.id, users.forename, users.surname, users.password_hash,
-            family_members.role
-            FROM users
-            LEFT JOIN family_members ON users.id = family_members.user_id
-            WHERE users.username=?
-        """
-        params = (username,)
-        user = db.execute(sql, params).fetchone()
-
-        if not user:
-            flash(f"Unknown user", "error")
-            return redirect("/user/login")
-
-        if not check_password_hash(user["password_hash"], password):
-            flash(f"Incorrect password", "error")
-            return redirect("/user/login")
-
-        session["logged_in"] = True
-        session["user"] = {
-            "id":       user["id"],
-            "username": username,
-            "forename": user["forename"],
-            "surname":  user["surname"],
-            "role":     user["role"],
-        }
-        flash("Login successful", "success")
-        return redirect("/home_logged")
-
-#-----------------------------------------------------------
 # Join family
 #-----------------------------------------------------------
 @app.post("/family/join")
@@ -253,45 +292,7 @@ def join_family():
 
         flash("You have joined the family!", "success")
         return redirect("/family")
-#-----------------------------------------------------------
-# Handle user logout
-#-----------------------------------------------------------
-@app.get("/logout")
-def logout():
-    session.clear()
-    flash(f"You have been logged out", "success")
-    return redirect("/")
 
-#-----------------------------------------------------------
-# New Chore Page
-#-----------------------------------------------------------
-@app.get("/chore/new")
-def show_chore_form():
-    return render_template("pages/chore_form.jinja")
-
-#-----------------------------------------------------------
-# Home page not logged in
-#-----------------------------------------------------------
-@app.get("/")
-def show_home_page():
-    return render_template("pages/home_page_not_logged.jinja")
-
-#-----------------------------------------------------------
-# Home page logged in
-#-----------------------------------------------------------
-@app.get("/home_logged")
-def show_home_page_logged_in():
-    with connect_db() as db:
-        sql = """
-            SELECT 
-            *
-            FROM users
-        """
-        params = ()
-        users = db.execute(sql, params).fetchall()
-
-        return render_template("pages/home_page_logged_in.jinja", users=users)
-    
 #-----------------------------------------------------------
 # Chores page - show all chores
 #-----------------------------------------------------------
@@ -319,6 +320,7 @@ def show_all_chores():
                 FROM family_members
                 WHERE user_id = ?
             )
+            ORDER BY priority DESC
         """
 
         params = (session["user"]["id"],)
@@ -358,7 +360,7 @@ def add_chore():
         flash("Due time is required", "error")
         return redirect("/chore/new")
     
-    if priority < 1 or priority > 5:
+    if priority < 1 or priority > 3:
         flash("Priority should be between 1 and 5", "error")
         return redirect("/chore/new")
 
