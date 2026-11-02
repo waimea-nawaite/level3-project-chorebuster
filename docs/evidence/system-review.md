@@ -11,17 +11,17 @@ clear buttons and where each click would take you
 ### Privacy
 
 To address this implication I made sure to safely store information that could harm the user and that the website only asks for infomation from the user that
-is important and not unnessary
+is important and not unnecessary information that could cause the use harm 
 
 
-### NAME OF IMPLICATION 3
+### End-User
 
-Replace this text with notes about what you did during the project to address the implication - design features, etc.
+Since families would be using the website, I made sure to write it for all ages and have obvious paths of where each link or section went to while also thinking
+of the ages
 
+### Aesthetics 
 
-### NAME OF IMPLICATION 4
-
-Replace this text with notes about what you did during the project to address the implication - design features, etc.
+I made my aesthetics of my website dark and more colorful for the interactive buttons
 
 
 ### NAME OF IMPLICATION 5
