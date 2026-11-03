@@ -21,12 +21,14 @@ of the ages
 
 ### Aesthetics 
 
-I made my aesthetics of my website dark and more colorful for the interactive buttons
+I made my aesthetics of my website dark and more colorful for the interactive buttons so that users can clearly see buttons and while making the website not
+painful to look at being easy on the eyes
 
 
-### NAME OF IMPLICATION 5
+### Functionality
 
-Replace this text with notes about what you did during the project to address the implication - design features, etc.
+I made my website functional by not only being sure it works but to make sure that the user can use it quickly so that they dont get annoyed by it or frustrated 
+that it takes mulitple processes just to complete a chore
 
 
 ## Overall Review
