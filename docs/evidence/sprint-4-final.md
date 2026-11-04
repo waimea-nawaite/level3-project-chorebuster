@@ -46,7 +46,7 @@ I am testing the family page to see how the final page looks like without any cs
 
 I changed a lot of the css and look to the family list because the old one wasnt very good looking or interesting
 
-![Alt text](Family-page-css.png)
+![Alt text](screenshots/Family-page-css.png)
 
 
 ## Testing Chore page
@@ -60,7 +60,7 @@ I am testing to see how my chore page looks without css because it is functionin
 I change many different things to finalise how I imagined the chore list to look like and I believe it is pretty nice by adding boxes to seperate
 each chore to giving colours to different priority levels
 
-![Alt text](chore-page-css.png)
+![Alt text](screenshots/chore-page-css.png)
 
 
 
