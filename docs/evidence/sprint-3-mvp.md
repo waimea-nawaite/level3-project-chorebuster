@@ -65,7 +65,7 @@ With the previous version it set the users role as a owner which is bad after so
 
 I will be testing to see if adding a chore shows the chore in the chore list page
 
-![Alt text](Testing-add-chore1.gif)
+![Alt text](screenshots/Testing-add-chore1.gif)
 
 ### Changes / Improvements
 
