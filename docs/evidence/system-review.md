@@ -34,8 +34,12 @@ that it takes mulitple processes just to complete a chore
 ## Overall Review
 
 Replace these words with a brief review of how the project went in terms of:
-- What went well?
-- What didn't go so well?
-- How did the testing/trialling impact the final system?
-- What would you do differently if you could?
+
+- What went well in my project was that many of my ideas happened and was easy to complete and I like the finished result.
+
+- What didnt go great was that I wanted a whole leaderboard and point system but I ran out of time and decided families could just do it themselves.
+
+- The testing and trialling did impact the final systems from changing my ideas that I started out with but I believe it changed it for the better.
+
+- If I could do anything differently I would start with the stuff that is easy first and only focus on one part at a time to give me more time later on.
 

@@ -70,9 +70,6 @@ I am going to open the terminal to see if it displays 3 individual families to s
 No improvements or changes were required because the feature worked as expected as the test results showed it worked as intended
 
 
-## ETC...
-
-
 ## Sprint Review
 
 This sprint helped move the project forward by me finding things I didnt and did like within my website and also allowing me to test many features to make sure they

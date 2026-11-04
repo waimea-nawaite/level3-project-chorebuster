@@ -1,14 +1,16 @@
-# Chores for idiots Project
+# ChoreBuster Project
 
 ## Project Description
 
-This is an app that allows people who are very bad at doing or remembering their chores
+This is a web application designed to help families organise, manage and remember their household chores. It allows family members to view assigned chores, track their progress and earn points for completing tasks.
 
 The app has the following key features:
-- Feature one
-- Feature two
-- Feature three
-- ...
+- **Family management:** Users can create a family, join an existing family using a family code and view other family members.
+- **Chore creation:** Family owners can create chores with descriptions, due dates and priority levels.
+- **Chore management:** Family members can view available chores and mark them as completed.
+- **User accounts:** Users can sign up, log in and log out of their accounts.
+- **Family roles:** Owners have additional permissions to manage chores and family members, while regular members can complete chores.
+- **Chore tracking:** Users can see which chores have been completed.
 
 
 ## Live Site

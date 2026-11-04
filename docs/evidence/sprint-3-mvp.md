@@ -73,8 +73,6 @@ With the previous version I wanted to allow options to set the chore complete an
 
 ![Alt text](screenshots/Testing-add-chore.gif)
 
-## ETC...
-
 
 ## Sprint Review
 

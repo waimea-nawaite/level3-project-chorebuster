@@ -3,15 +3,16 @@
 
 ## Sprint Goals
 
-Develop the system until it is fully featured, with a refined UI and it satisfies the requirements. The system will be fully tested at this point.
+Develop the system into its final version by improving the website's design, refining the user experience and ensuring all features work correctly. Complete final testing to make sure the system meets all requirements.
 
 ### Specific Goals
 
-**Edit these goals as needed**
-
-- Refine the design and UI of the website
-- Refine the user experience (UX) of the system
-- Perform final, full-system testing
+- Improve the overall design and appearance of the website, including forms, the family page and the chore list.
+- Make the website consistent by using the same colours, layouts and styling across all pages.
+- Improve the user experience by making the website easier to navigate and use.
+- Check that all features work correctly, including family management, chore creation, chore completion and the points system.
+- Perform final testing to identify and fix any remaining bugs or problems.
+- Ensure the finished system meets all project requirements.
 
 
 ## Testing Forms e.g. signup and add chore
@@ -62,10 +63,9 @@ each chore to giving colours to different priority levels
 ![Alt text](chore-page-css.png)
 
 
-## ETC...
-
 
 ## Sprint Review
 
-Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.
+This sprint definately was the one that helped me the most to determine whether the style would do a huge difference and turns out it definately does I really like the
+final system.
 

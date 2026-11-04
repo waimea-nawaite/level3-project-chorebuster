@@ -17,8 +17,8 @@ Use complex techniques to develop a database means that, taking into account the
    - [x] **Data Types** - a range of data types used
    - [x] **Key Fields** - primary keys for each table, foreign keys for relationships
    - [x] **Values** - auto-generation / default values as required
-   - [ ] Source and structure of **Input Data** is described
-   - [ ] Type and format of **Output Data** is described
+   - [x] Source and structure of **Input Data** is described
+   - [x] Type and format of **Output Data** is described
    - [x] **Processing of Data** to achieve the output is described
 
 3. You should use appropriate tools and complex techniques to organise and query the data:
@@ -31,14 +31,14 @@ Use complex techniques to develop a database means that, taking into account the
    - [x] Applying **data access permissions** as appropriate (user accounts)
 
 5. You must apply appropriate data integrity and testing procedures:
-   - [ ] Show that any **presented data is correct** (e.g. matches database values / calculations)
-   - [ ] Show that any input user data **updates the database as expected**
+   - [x] Show that any **presented data is correct** (e.g. matches database values / calculations)
+   - [x] Show that any input user data **updates the database as expected**
 
 6. You need to explain and address relevant implications:
-   - [ ] Identify the **implications most relevant** to your project
-   - [ ] Explain **what the implications mean** and **why each is relevant** to your project
-   - [ ] Explain **how each implication will impact your specific project** (considerations / choices / designs)
-   - [ ] At the end of your project, you need to **explain what you did in your project to address each implication**
+   - [x] Identify the **implications most relevant** to your project
+   - [x] Explain **what the implications mean** and **why each is relevant** to your project
+   - [x] Explain **how each implication will impact your specific project** (considerations / choices / designs)
+   - [x] At the end of your project, you need to **explain what you did in your project to address each implication**
 
 *Note: You must satisfy **all** of the criteria above to pass*
 
