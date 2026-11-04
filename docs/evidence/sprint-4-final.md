@@ -14,45 +14,52 @@ Develop the system until it is fully featured, with a refined UI and it satisfie
 - Perform final, full-system testing
 
 
-## Testing FEATURE NAME HERE
+## Testing Forms e.g. signup and add chore
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+I am testing to see how my forms look like without any css and then design it to fit my website I will pick signup and add chore forms
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+### Sign-up page
+![Alt text](screenshots/Sign-up-nocss.png)
 
-![Placeholder](screenshots/placeholder.png)
-
-### Changes / Improvements
-
-Replace this text with notes any improvements you made as a result of the testing.
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
-
-
-## Testing FEATURE NAME HERE
-
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
-
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+### Add a new chore page
+![Alt text](screenshots/Add-chore-nocss.png)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+As a result of the testing I changed a lot to do with the forms making it look in my opinion fresh and satisfying these images show the differences these themes and styles
+all appear on every form on the website
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+### Sign-up page
+![Alt text](screenshots/Sign-up-css.png)
 
+### Add a new chore page
+![Alt text](screenshots/Add-chore-css.png)
 
-## Testing FEATURE NAME HERE
+## Testing Family page
 
-Replace this text with notes about what you are testing, how you tested it, and the outcome of the testing
+I am testing the family page to see how the final page looks like without any css
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE TESTING HERE**
+![Alt text](screenshots/Family-page-nocss.png)
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+I changed a lot of the css and look to the family list because the old one wasnt very good looking or interesting
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE IMPROVED SYSTEM HERE**
+![Alt text](Family-page-css.png)
+
+
+## Testing Chore page
+
+I am testing to see how my chore page looks without css because it is functioning now properly then will make it look good
+
+![Alt text](screenshots/Chore-page-nocss.png)
+
+### Changes / Improvements
+
+I change many different things to finalise how I imagined the chore list to look like and I believe it is pretty nice by adding boxes to seperate
+each chore to giving colours to different priority levels
+
+![Alt text](chore-page-css.png)
 
 
 ## ETC...

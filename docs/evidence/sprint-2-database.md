@@ -7,18 +7,22 @@ Implement the database, populated with test data. Create queries that retrieve t
 
 ### Specific Goals
 
-**Edit these goals as needed**
+- Test the database structure:
+    - Check that the required tables and columns exist.
+    - Check that data is being stored correctly.
+    - Test database relationships and user roles.
+    - Make changes to the database where necessary.
 
-- Implement the database
-- Add test data to the database
-- Create the following web pages:
-    - Home pages showing...
-    - Details page for ...
-    - Etc.
-- Develop SQL database queries to:
-    - Retrieve all ...
-    - Retrieve specific ...
-    - Etc.
+- Test displaying database information:
+    - Check that chore titles, descriptions and due dates display correctly.
+    - Check that family members, names, family codes and roles display correctly.
+    - Check that multiple families are stored separately.
+
+- Test and improve functionality:
+    - Check that users can mark chores as complete.
+    - Test that owners and members have the correct permissions.
+    - Improve features based on testing results.
+    - Fix any problems found during testing.
 
 
 ## Testing Database and test data
@@ -45,7 +49,6 @@ I decided to remove the point system I didnt like the idea and improved the due 
 
 ![Alt text](screenshots/show-chore2.png)
 
-
 ## Testing Displaying family members
 
 I will open the Family page and check that the family code, names and roles display correctly.
@@ -54,7 +57,17 @@ I will open the Family page and check that the family code, names and roles disp
 
 ### Changes / Improvements
 
-No changes were required following testing, as the feature worked as expected. The test results confirmed that the feature functioned correctly.
+No improvements or changes were required because the feature worked as expected as the test results showed it worked as intended
+
+## Testing if the Database shows all families
+
+I am going to open the terminal to see if it displays 3 individual families to show that it stores it correctly
+
+![Alt text](screenshots/Family-page2.png)
+
+### Changes / Improvements
+
+No improvements or changes were required because the feature worked as expected as the test results showed it worked as intended
 
 
 ## ETC...
@@ -62,5 +75,6 @@ No changes were required following testing, as the feature worked as expected. T
 
 ## Sprint Review
 
-Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.
+This sprint helped move the project forward by me finding things I didnt and did like within my website and also allowing me to test many features to make sure they
+work correctly and well
 

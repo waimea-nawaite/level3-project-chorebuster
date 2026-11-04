@@ -6,18 +6,29 @@
 
 {% block content %}
 
+    <div class="family-container">
+
     <h2>Family Members</h2>
-    <h3>Family Code: {{ families[0].family_code }}</h3>
 
-    {% for family in families %}
-        
-        <div>
-            <p>
-                + {{ family.forename }} {{ family.surname }}
-                - {{ family.role }}
-            </p>
-        </div>
+    <div class="family-code">
+        <h3>Family Code</h3>
+        <p>{{ families[0].family_code }}</p>
+    </div>
 
-    {% endfor %}
+    <div class="family-members">
+
+        {% for family in families %}
+
+            <div class="family-member">
+                <p>{{ family.forename }} {{ family.surname }}</p>
+                <span>{{ family.role }}</span>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 {% endblock %}
+

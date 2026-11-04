@@ -16,16 +16,19 @@
            value="{{ chore.title }}">
 
     <label>Body</label>
-    <input placeholder="e.g. Noodles with meat" name="body">{{ chore.body }} </input>
+    <input placeholder="e.g. Noodles with meat" name="body" value="{{ chore.body }}"></input>
 
     <label>Priority</label>
-    <input type="number" name="priority" min="1" max="3" placeholder="e.g. 3 for urgent" required></input>
+    <input type="number" name="priority" min="1" max="3" placeholder="e.g. 3 for urgent" value="{{ chore.priority }}" required></input>
 
     <label>Due time</label>
-    <input type="int"
-           name="due_time"
-           placeholder="Write the actual time e.g. 15:30"
-           value="{{ chore.due_time }}">
+    <input
+          type="datetime-local"
+          id="due_time"
+          name="due_time"
+          value="{{ chore.due_time }}"
+          required
+      >
 
     <button type="submit">
         Save Changes

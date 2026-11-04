@@ -7,41 +7,25 @@ Develop a design for the database and a UI prototype that simulates the key func
 
 ### Specific Goals
 
-**Edit these goals as needed**
+- Design the UI flow:
+    - Plan how users navigate between pages.
+    - Show how the UI changes between different states.
+    - Identify the required pages and their connections.
 
-- Design the database:
-    - Tables
-    - Fields / types
-    - Primary keys
-    - Default / nullable values
-    - Relationships (foreign keys)
-- Design the UI
-    - Key pages
-    - User interactions and 'flow'
-    - Page layouts / features
-    - Colour palette
-    - Etc.
+- Develop the UI prototypes:
+    - Create initial layouts for each page.
+    - Design page features and user interactions.
+    - Establish a consistent layout across the application.
 
+- Refine the UI design:
+    - Choose a suitable colour palette and fonts.
+    - Improve button placement, shapes and backgrounds.
+    - Add features based on end-user feedback, such as notes and a leaderboard.
 
-## Initial Database Design
-
-Replace this text with notes regarding the DB design.
-
-![DB Design](screenshots/placeholder.png)
-
-
-### Required Data Input
-
-Replace this text with a description of what data will be input, and where / how it will be obtained.
-
-### Required Data Output
-
-Replace this text with a description of the outputs for the system - what types of data will be displayed?
-
-### Required Data Processing
-
-Replace this text with a description of how the data will be processed to achieve the desired output(s) - any processes / formulae?
-
+- Test and improve the prototypes:
+    - Gather feedback from the end user.
+    - Identify areas that could be improved.
+    - Make changes based on feedback and review the final designs.
 
 ## UI 'Flow'
 
@@ -51,7 +35,6 @@ This Figma demo shows the initial design for the UI 'flow':
 
 ![DB Design](screenshots/V1-First-Prototype.png)
 [UI Flow First Layout](https://design.penpot.app/#/workspace?team-id=f0485fb1-4e63-8165-8008-390723624d40&file-id=81f57451-85cc-819d-8008-7834312c8578&page-id=f0485fb1-4e63-8165-8008-3907adf20b47)
-
 
 ### Testing
 

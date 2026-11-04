@@ -7,14 +7,25 @@ Continue to develop the web application to the point that it provides all key fu
 
 ### Specific Goals
 
-**Edit these goals as needed**
+- Test user account functionality:
+    - Check that users can successfully create an account.
+    - Test that users can log in to their existing accounts.
 
-- Create the following web pages:
-    - Form for ...
-    - Etc.
-- Develop SQL database queries to:
-    - Add a new ...
-    - Etc.
+- Test family management:
+    - Check that users can create a family and become its owner.
+    - Test that a unique family code is generated.
+    - Check that users can join an existing family using its code.
+    - Ensure joining users are assigned the correct member role.
+
+- Test chore management:
+    - Check that owners can create new chores.
+    - Ensure newly created chores appear in the chore list.
+    - Test editing, completing and deleting chores.
+
+- Identify and fix problems:
+    - Test that each feature works as intended.
+    - Identify errors and make improvements based on testing results.
+    - Ensure user roles and permissions are assigned correctly.
 
 
 ## Testing User Sign-up and Login
@@ -38,7 +49,6 @@ I will be testing to see if creating a family makes you the owner and generates 
 
 No improvements or changes were required because the feature worked as expected as the test results showed it worked as intended
 
-
 ## Testing Joining Family
 
 I will be testing to see if joining an already made family with a family code works and sets the users role to member
@@ -51,11 +61,22 @@ With the previous version it set the users role as a owner which is bad after so
 
 ![Alt text](<screenshots/Joining family fix.gif>)
 
+## Testing add chore and if it goes into the chorelist
+
+I will be testing to see if adding a chore shows the chore in the chore list page
+
+![Alt text](Testing-add-chore1.gif)
+
+### Changes / Improvements
+
+With the previous version I wanted to allow options to set the chore complete and edit while keeping the delete button
+
+![Alt text](screenshots/Testing-add-chore.gif)
 
 ## ETC...
 
 
 ## Sprint Review
 
-Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.
-
+This sprint helped move the project foward lots because it helped me see that it had some issues and Ideas that I do not like allowing for my website 
+to feel and look more complete for the next part
