@@ -19,6 +19,8 @@ is important and not unnecessary information that could cause the use harm.
 As you can see with the screenshot when the user is creating an account it doesn't ask for unnecessary information
 
 ![Alt text](screenshots/Privacy1.png)
+As you can see with this screenshot the password is stored as a hash so that it is safe and secure
+![Alt text](screenshots/Privacy2.png)
 
 ### End-User
 
