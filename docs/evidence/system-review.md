@@ -26,7 +26,7 @@ Since families would be using the website, I made sure to write it for all ages 
 of the ages
 As you can see by the screenshot I made the chores page for example easy to read and simple which younger users shouldn't have a problem learning
 
-![Alt text](screenshots/End_User1.png)
+![Alt text](screenshots/End-User1.png)
 
 ### Aesthetics 
 
