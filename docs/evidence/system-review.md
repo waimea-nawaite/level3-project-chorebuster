@@ -6,6 +6,10 @@
 
 To address this implication I made sure to think as a user that would first open the website and be able to use it well by making it have simple instructions
 clear buttons and where each click would take you
+With these screenshots you can see that the form is easy to use and straight forward:
+
+![Alt text](screenshots/Usability1.png)
+![Alt text](screenshots/Usability2.png)
 
 
 ### Privacy
