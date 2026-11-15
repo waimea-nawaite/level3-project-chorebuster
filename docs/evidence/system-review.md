@@ -4,8 +4,8 @@
 
 ### Usability
 
-To address this implication I made sure to think as a user that would first open the website and be able to use it well by making it have simple instructions
-clear buttons and where each click would take you
+To address this implication in my final system I made sure to think as a user that would first open the website and be able to use it well by making it have simple instructions
+clear buttons and where each click would take you instead of confusing paths or options
 With these screenshots you can see that the form is easy to use and straight forward:
 
 ![Alt text](screenshots/Usability1.png)
@@ -14,7 +14,7 @@ With these screenshots you can see that the form is easy to use and straight for
 
 ### Privacy
 
-To address this implication I made sure to safely store information that could harm the user and that the website only asks for infomation from the user that
+To address this implication in my final system I made sure to safely store information that could harm the user and that the website only asks for information from the user that
 is important and not unnecessary information that could cause the use harm.
 As you can see with the screenshot when the user is creating an account it doesn't ask for unnecessary information
 
@@ -22,32 +22,30 @@ As you can see with the screenshot when the user is creating an account it doesn
 
 ### End-User
 
-Since families would be using the website, I made sure to write it for all ages and have obvious paths of where each link or section went to while also thinking
-of the ages
+To address this implication in my final system I made sure to think about families that would use the website, how I addressed this implication was by thinking about younger ages that are impatient and lazy
+and making obvious paths to each location of the website so it is quick and simple while also engaging.
 As you can see by the screenshot I made the chores page for example easy to read and simple which younger users shouldn't have a problem learning
 
 ![Alt text](screenshots/End-User1.png)
 
 ### Aesthetics 
 
-I made my aesthetics of my website dark and more colorful for the interactive buttons so that users can clearly see buttons and while making the website not
-painful to look at being easy on the eyes
+To address this implication in my final system I made sure to make the aesthetics of my website have a dark body but more colorful colors for the interactive buttons so that users can clearly see buttons
+this makes the website not annoying to look at being easy on the eyes which helps lots of users.
 As you can see in the screenshot I made the colors nice to look at so it isn't superbright and color coded for the priority and buttons.
 
 ![Alt text](screenshots/Aesthetics1.png)
 
 ### Functionality
 
-I made my website functional by not only being sure it works but to make sure that the user can use it quickly so that they dont get annoyed by it or frustrated 
-that it takes mulitple processes just to complete a chore
+To address this implication in my final system I made sure to make the website functional by not only being sure it works but to make sure that the user can use it quickly so that they dont
+get annoyed by it or frustrated that it takes multiple processes just to complete a chore without wasting their time because otherwise why would they need the site.
 As you can see by the gif going from logging in to creating a new chore or showing the list of chores all took around 3 clicks while also making sure it worked.
 
 ![Alt text](<screenshots/Functionality1.gif>)
 
 
 ## Overall Review
-
-Replace these words with a brief review of how the project went in terms of:
 
 - What went well in my project was that many of my ideas happened and was easy to complete and I like the finished result.
 
